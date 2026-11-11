@@ -13,7 +13,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,       KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_NO,           KC_NO,       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_NO,
         KC_ESC,       KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    LCTL(KC_B),      LSFT(KC_ENT),KC_H,    KC_J,    KC_K,    KC_L,    KC_NO,   KC_ENT,
         KC_TILD,      KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                                  KC_N,    KC_M,    UNUSED_BE,KC_NO, UNUSED_E,KC_SLSH,
-        KC_NO,        KC_NO,   KC_NO,   KC_NO,   KC_NO,            APPS,            NAVSYM,              LANG_SWITCH,KC_NO, KC_NO,   KC_NO,   KC_NO,
+        KC_NO,        KC_NO,   MO(SYSTEM),KC_NO, KC_NO,            MO(APPS),        MO(NAV),             LANG_SWITCH,MO(SYMBOLS_EN),MO(NUMBERS),KC_NO,KC_NO,
                                               KC_LSFT, KC_LGUI, KC_BSPC,          KC_RALT, KC_RCTL, KC_SPC
     ),
     [RU_BASE] = LAYOUT(
@@ -24,23 +24,39 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______, _______, _______, _______,         _______,             _______,          _______, _______, _______, _______, _______,
                                             _______, _______, _______,             _______, _______, _______
     ),
-    [APP_NUM] = LAYOUT(
-        HELLO_KOTIFY,_______,_______,_______, _______, _______, _______,             _______, _______, _______, _______, _______, _______, _______,
-        KC_NO,   APP(KC_Q),APP(KC_W),APP(KC_E),APP(KC_R),APP(KC_T),KC_NO,            KC_NO,   KC_NO,   KC_7,    KC_8,    KC_9,    KC_NO,   KC_NO,
-        KC_NO,   APP(KC_A),APP(KC_S),APP(KC_D),APP(KC_F),APP(KC_G),KC_NO,            KC_NO,   KC_0,    KC_4,    KC_5,    KC_6,    KC_NO,   KC_NO,
-        KC_NO,   APP(KC_Z),APP(KC_X),APP(KC_C),APP(KC_V),LGUI(LSFT(KC_5)),                     KC_NO,   KC_1,    KC_2,    KC_3,    KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,             _______,             _______,          KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+    [APPS] = LAYOUT(
+        HELLO_KOTIFY,KC_NO,KC_NO,  KC_NO,   KC_NO,   KC_NO,   KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   APP(KC_Q),APP(KC_W),APP(KC_E),APP(KC_R),APP(KC_T),KC_NO,            KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   APP(KC_A),APP(KC_S),APP(KC_D),APP(KC_F),APP(KC_G),KC_NO,            KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   APP(KC_Z),APP(KC_X),APP(KC_C),APP(KC_V),LGUI(LSFT(KC_5)),                     KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   KC_NO,   _______,KC_NO,   KC_NO,             _______,             _______,          KC_NO,   _______,_______,KC_NO,   KC_NO,
                                             _______, _______, _______,             _______, _______, _______
     ),
-    [NAV_SYM_EN] = LAYOUT(
-        _______, _______, _______, _______, _______, _______, _______,             _______, _______, RCTL(RSFT(KC_TAB)),RCTL(KC_TAB),_______,_______,_______,
-        _______, KC_LT,   KC_GT,   KC_EQL,  KC_LCBR, KC_RCBR, _______,             KC_NO,   RALT(KC_LEFT),KC_PGDN,KC_PGUP,RALT(KC_RGHT),KC_NO,KC_NO,
-        _______, KC_PLUS, KC_ASTR, KC_PERC, KC_LBRC, KC_RBRC, KC_AMPR,             KC_NO,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_NO,   KC_NO,
-        _______, KC_AT,   KC_DLR,  KC_HASH, KC_CIRC, KC_PIPE,                                  LGUI(KC_LEFT),LGUI(KC_DOWN),LGUI(KC_UP),LGUI(KC_RGHT),KC_NO,KC_NO,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,             _______,             _______,          KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+    [NAV] = LAYOUT(
+        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,               KC_NO,   KC_NO,   RCTL(RSFT(KC_TAB)),RCTL(KC_TAB),KC_NO,KC_NO,KC_NO,
+        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,               KC_NO,   RALT(KC_LEFT),KC_PGDN,KC_PGUP,RALT(KC_RGHT),KC_NO,KC_NO,
+        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,               KC_NO,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_NO,   KC_NO,
+        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                                    LGUI(KC_LEFT),LGUI(KC_DOWN),LGUI(KC_UP),LGUI(KC_RGHT),KC_NO,KC_NO,
+        KC_NO,   KC_NO,   _______,KC_NO,   KC_NO,             _______,             _______,          KC_NO,   _______,_______,KC_NO,   KC_NO,
                                             _______, _______, _______,             _______, _______, _______
     ),
-    [NAV_SYM_RU] = LAYOUT(
+    [NUMBERS] = LAYOUT(
+        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   KC_NO,   KC_7,    KC_8,    KC_9,    KC_NO,   KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   KC_0,    KC_4,    KC_5,    KC_6,    KC_NO,   KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   KC_NO,   KC_1,    KC_2,    KC_3,    KC_NO,                                    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   KC_NO,   _______,KC_NO,   KC_NO,             _______,             _______,          KC_NO,   _______,_______,KC_NO,   KC_NO,
+                                            _______, _______, _______,             _______, _______, _______
+    ),
+    [SYMBOLS_EN] = LAYOUT(
+        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   KC_LT,   KC_GT,   KC_EQL,  KC_LCBR, KC_RCBR, KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   KC_PLUS, KC_ASTR, KC_PERC, KC_LBRC, KC_RBRC, KC_AMPR,             KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   KC_AT,   KC_DLR,  KC_HASH, KC_CIRC, KC_PIPE,                                  KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   KC_NO,   _______,KC_NO,   KC_NO,             _______,             _______,          KC_NO,   _______,_______,KC_NO,   KC_NO,
+                                            _______, _______, _______,             _______, _______, _______
+    ),
+    [SYMBOLS_RU] = LAYOUT(
         _______, _______, _______, _______, _______, _______, _______,             _______, _______, _______, _______, _______, _______, _______,
         _______, EN_LT,   EN_GT,   EN_EQL,  EN_LCBR, EN_RCBR, _______,             _______, _______, _______, _______, _______, _______, _______,
         _______, EN_PLUS, EN_ASTR, EN_PERC, EN_LBRC, EN_RBRC, EN_AMPR,             _______, _______, _______, _______, _______, _______, _______,
@@ -50,10 +66,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [SYSTEM] = LAYOUT(
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   QK_BOOT,
-        KC_NO,   RM_TOGG, RM_VALD, RM_VALU, KC_NO,   KC_NO,   KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   RM_PREV, RM_NEXT, KC_NO,   KC_NO,   KC_NO,   KC_NO,               KC_NO,   KC_MPLY, KC_VOLD, KC_VOLU, KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,               KC_NO,   RM_TOGG, RM_VALD, RM_VALU, RM_PREV, RM_NEXT, KC_NO,
+        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,               KC_NO,   KC_MPLY, KC_VOLD, KC_VOLU, KC_NO,   KC_NO,   KC_NO,
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                                    KC_NO,   KC_BRID, KC_BRIU, KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,             _______,             _______,          KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   KC_NO,   _______,KC_NO,   KC_NO,             _______,             _______,          KC_NO,   _______,_______,KC_NO,   KC_NO,
                                             _______, _______, _______,             _______, _______, _______
     ),
 };
@@ -111,12 +127,11 @@ static void set_language(bool russian) {
 }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-    state = update_tri_layer_state(state, APP_NUM, NAV_SYM_EN, SYSTEM);
-    // Keep the English Nav-Symbol layer active beneath its Russian overlay.
-    if (is_russian() && (state & (1UL << NAV_SYM_EN))) {
-        state |= 1UL << NAV_SYM_RU;
+    // Keep the English Symbols layer active beneath its Russian overlay.
+    if (is_russian() && (state & (1UL << SYMBOLS_EN))) {
+        state |= 1UL << SYMBOLS_RU;
     } else {
-        state &= ~(1UL << NAV_SYM_RU);
+        state &= ~(1UL << SYMBOLS_RU);
     }
     return state;
 }
@@ -153,12 +168,6 @@ combo_t key_combos[] = {
 
 bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
     const uint8_t layer = get_highest_layer(layer_state | default_layer_state);
-    if (layer == SYSTEM) {
-        return false;
-    }
-    if (combo_index == EXCLAMATION) {
-        return true;
-    }
     if (layer != EN_BASE && layer != RU_BASE) {
         return false;
     }

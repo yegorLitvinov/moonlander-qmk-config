@@ -4,18 +4,40 @@ Custom QMK layout for Moonlander Mark I **revision A** (`zsa/moonlander/reva`).
 Adapted from the K03 English/Russian layout in `ergohaven-zmk-config`.
 Imported K03 source revision: `f750cfc`.
 
+All layer activation keys are momentary: their layers are active only while
+held. Keep this behavior for future layout changes. EN/RU language switching is
+separate.
+
+## Layer keys
+
+Bottom-row keys activate a layer on the **opposite half**. Thumb-cluster keys
+activate a layer on the **same half**. Keep these rules for future layout changes.
+
+| Activation key | Layer | Layer actions |
+| --- | --- | --- |
+| Bottom row under K, right | Symbols | Left half |
+| Bottom row under L, right | Numbers | Left half |
+| Bottom row under S, left | System | Right half |
+| Left red thumb key | Apps | Left half |
+| Right red thumb key | Nav | Right half |
+
+Unassigned keys do nothing on every layer. The five layer activation keys and
+the six narrow thumb keys remain available on every layer. Holding multiple
+layer keys uses the highest-priority held layer: System, Symbols, Numbers, Nav,
+then Apps. Releasing it returns to the next held layer or the base layer.
+
 ## Thumb keys
 
 Positions below run left to right as you look down at the keyboard.
 
 | Side | Three narrow keys | Red key above them |
 | --- | --- | --- |
-| Left | Shift · Command · Backspace | Hold for App–Num |
-| Right | Right Alt · Right Control · Space | Hold for Nav–Symbol |
+| Left | Shift · Command · Backspace | Hold for Apps |
+| Right | Right Alt · Right Control · Space | Hold for Nav |
 
-Hold **both red keys** for System. Release either key to return to the layer
-controlled by the other key. Thumb modifiers, Backspace, and Space remain
-available on every layer.
+Each red key activates its layer alone. Shift and Space keep their normal
+actions, including while a red key is held. Holding both red keys does not
+activate System; use the bottom-row key under S.
 
 Command + Backspace sends **Alt + Backspace** to delete a word. Releasing Command
 first does not send an extra plain Backspace.
@@ -32,13 +54,12 @@ unassigned key, underscore, and minus, matching the updated K03.
 | Under M | Switch EN/RU |
 | Inner key left of H | Shift + Enter |
 | Inner key right of G | Ctrl + B |
-| Top-left key while holding App–Num | Updated `hello_kotify` macro |
+| Top-left key while holding Apps | Updated `hello_kotify` macro |
 | Top-right key | Hold for one second to send Cmd + Ctrl + Q (lock macOS) |
 
-The old bottom-row layer keys are replaced by the red keys. The other spare
-bottom-row keys are unassigned. In English, the three positions after M remain
-silent, but two still participate in the K03 combos. Russian uses them for Б, Ю,
-and Э.
+The other spare bottom-row keys are unassigned. In English, the three positions
+after M remain silent, but two still participate in the K03 combos. Russian
+uses them for Б, Ю, and Э.
 
 ### Language switching
 
@@ -57,27 +78,32 @@ Held modifiers are preserved around input-source shortcuts. The `hello_kotify`
 macro searches for `kotify ser`, then sends the original greeting. It restores
 the current keyboard language when finished.
 
-## App–Num
+## Apps
 
 Hold the **left red key**.
 
 The left side keeps the K03 application shortcuts: Cmd + Ctrl + Alt with
 Q/W/E/R/T, A/S/D/F/G, and Z/X/C/V. B sends Cmd + Shift + 5.
 The top-left key runs the `hello_kotify` macro, matching its move off the K03 base
-layer.
+layer. Numbers have their own layer; the right main-body keys do nothing on Apps.
+
+## Numbers
+
+Hold the **right bottom-row key under L**. Numbers are on the left half.
 
 | Physical keys | Output |
 | --- | --- |
-| U · I · O | 7 · 8 · 9 |
-| H · J · K · L | 0 · 4 · 5 · 6 |
-| M · next key · next key | 1 · 2 · 3 |
+| W · E · R | 7 · 8 · 9 |
+| A · S · D · F | 0 · 4 · 5 · 6 |
+| X · C · V | 1 · 2 · 3 |
 
-These are regular number-row keycodes, matching the K03, rather than keypad
-keycodes.
+Zero is on **A**, under the left pinky. These are regular number-row keycodes,
+matching the K03, rather than keypad keycodes. The right main-body keys do
+nothing on Numbers.
 
-## Nav–Symbol
+## Symbols
 
-Hold the **right red key**. The left side keeps the K03 symbol block:
+Hold the **right bottom-row key under K**. The left half keeps the K03 symbol block:
 
 ```text
 Q  W  E  R  T       <  >  =  {  }
@@ -86,6 +112,13 @@ Z  X  C  V  B       @  $  #  ^  |
 ```
 
 `&` moves to the inner key right of G because Moonlander has no key beside B.
+The Russian variant sends the same symbols by temporarily selecting English.
+The right main-body keys do nothing on Symbols.
+
+## Nav
+
+Hold the **right red key**. Navigation stays on the right half. Symbols have
+their own layer; the left main-body keys do nothing on Nav.
 
 | Physical keys | Navigation output |
 | --- | --- |
@@ -94,24 +127,22 @@ Z  X  C  V  B       @  $  #  ^  |
 | N · M · next key · next key | Cmd + Left · Cmd + Down · Cmd + Up · Cmd + Right |
 | Top-row keys above U and I | Right Ctrl + Shift + Tab · Right Ctrl + Tab |
 
-The Russian variant sends the same symbols by temporarily selecting English.
-
 ## System
 
-Hold **both red keys**. System takes priority over App–Num and Nav–Symbol.
+Hold the **left bottom-row key under S**. All System actions are on the right
+half. System takes priority over every other held layer.
 
 | Physical key | Action |
 | --- | --- |
 | H | Play/pause |
 | J / K | Volume down/up |
 | M / key right of M | Screen brightness down/up |
-| Q | RGB on/off |
-| W / E | RGB brightness down/up |
-| A / S | Previous/next RGB effect |
+| Y | RGB on/off |
+| U / I | RGB brightness down/up |
+| O / P | Previous/next RGB effect |
 | Top-right key | Enter bootloader mode for flashing |
 
-Other main-body keys are silent on System, so application shortcuts and symbols
-do not fall through from the layers beneath it.
+Other main-body keys do nothing on System.
 
 ## Combos
 
@@ -127,9 +158,8 @@ The combo window is 50 ms. Positions below use their English base labels.
 | M + key immediately to its right | Ъ | RU |
 | R + T | Original K03 Ё binding (`KC_BSLS`) | RU |
 
-Letter combos operate only on the base layers. The original exclamation combo
-also remains available on App–Num and Nav–Symbol. System disables these combos.
-The old symbol-layer combo is replaced by holding the right red key.
+Letter and punctuation combos work only on the base layers. Layer activation
+uses single keys, with no thumb combos.
 
 ## Local build
 
@@ -154,8 +184,8 @@ reuse the local checkout and its dependencies.
 Output: [dist/moonlander-reva.bin](dist/moonlander-reva.bin).
 
 Open Keymapp, choose Flash, and select that file. Enter bootloader mode with the
-physical reset button, or hold both red keys and press the top-right key after
-this layout is installed. Revision A appears as **STM32 Bootloader**.
+physical reset button, or hold the bottom-row key under S and press the top-right
+key after this layout is installed. Revision A appears as **STM32 Bootloader**.
 
 Building does not flash the keyboard. The firmware still needs to be tried on
 the physical keyboard, especially thumb reach, combo timing, and the computer's

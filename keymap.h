@@ -6,9 +6,11 @@
 enum layers {
     EN_BASE,
     RU_BASE,
-    APP_NUM,
-    NAV_SYM_EN,
-    NAV_SYM_RU,
+    APPS,
+    NAV,
+    NUMBERS,
+    SYMBOLS_EN,
+    SYMBOLS_RU,
     SYSTEM,
 };
 
@@ -46,6 +48,4 @@ enum custom_keycodes {
     EN_BSLS,
 };
 
-#define APPS MO(APP_NUM)
-#define NAVSYM MO(NAV_SYM_EN)
 #define APP(key) LGUI(LCTL(LALT(key)))
