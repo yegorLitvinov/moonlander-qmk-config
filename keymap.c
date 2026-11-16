@@ -13,7 +13,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,       KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_NO,           KC_NO,       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_NO,
         KC_ESC,       KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    LCTL(KC_B),      LSFT(KC_ENT),KC_H,    KC_J,    KC_K,    KC_L,    KC_NO,   KC_ENT,
         KC_TILD,      KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                                  KC_N,    KC_M,    UNUSED_BE,KC_NO, UNUSED_E,KC_SLSH,
-        KC_NO,        KC_NO,   MO(SYSTEM),KC_NO, KC_NO,            MO(APPS),        MO(NAV),             LANG_SWITCH,MO(SYMBOLS_EN),MO(NUMBERS),KC_NO,KC_NO,
+        KC_NO,        KC_NO,   MO(SYSTEM),KC_NO, KC_NO,            MO(APPS),        MO(NAV),             LANG_SWITCH,MO(SYMBOLS_EN),MO(NUMBERS),KC_NO,KC_DLR,
                                               KC_LSFT, KC_LGUI, KC_BSPC,          KC_RALT, KC_RCTL, KC_SPC
     ),
     [RU_BASE] = LAYOUT(
@@ -21,7 +21,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, RU_SHTI, RU_TSE,  RU_U,    RU_KA,   RU_IE,   _______,             _______, RU_EN,   RU_GHE,  RU_SHA,  RU_SHCH, RU_ZE,   _______,
         _______, RU_EF,   RU_YERU, RU_VE,   RU_A,    RU_PE,   _______,             _______, RU_ER,   RU_O,    RU_EL,   RU_DE,   RU_ZHE,  _______,
         EN_TILD, RU_YA,   RU_CHE,  RU_ES,   RU_EM,   RU_I,                                    RU_TE,   RU_SOFT, RU_BE,   RU_YU,   RU_E,    _______,
-        _______, _______, _______, _______, _______,         _______,             _______,          _______, _______, _______, _______, _______,
+        _______, _______, _______, _______, _______,         _______,             _______,          _______, _______, _______, _______, EN_DLR,
                                             _______, _______, _______,             _______, _______, _______
     ),
     [APPS] = LAYOUT(
@@ -41,26 +41,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                             _______, _______, _______,             _______, _______, _______
     ),
     [NUMBERS] = LAYOUT(
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   KC_7,    KC_8,    KC_9,    KC_NO,   KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_0,    KC_4,    KC_5,    KC_6,    KC_NO,   KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   KC_1,    KC_2,    KC_3,    KC_NO,                                    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   EN_PLUS, EN_MINS,             KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   KC_NO,   KC_7,    KC_8,    KC_9,    EN_ASTR, EN_SLSH,             KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   KC_0,    KC_4,    KC_5,    KC_6,    EN_EQL,  KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   KC_NO,   KC_1,    KC_2,    KC_3,    EN_PERC,                                  KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
         KC_NO,   KC_NO,   _______,KC_NO,   KC_NO,             _______,             _______,          KC_NO,   _______,_______,KC_NO,   KC_NO,
                                             _______, _______, _______,             _______, _______, _______
     ),
     [SYMBOLS_EN] = LAYOUT(
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_LT,   KC_GT,   KC_EQL,  KC_LCBR, KC_RCBR, KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_PLUS, KC_ASTR, KC_PERC, KC_LBRC, KC_RBRC, KC_AMPR,             KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_AT,   KC_DLR,  KC_HASH, KC_CIRC, KC_PIPE,                                  KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   KC_NO,   KC_NO,   KC_LCBR, KC_RCBR, KC_NO,   KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   KC_AT,   KC_HASH, KC_LBRC, KC_RBRC, KC_AMPR, KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   KC_CIRC, KC_PIPE, KC_LT,   KC_GT,   KC_NO,                                    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
         KC_NO,   KC_NO,   _______,KC_NO,   KC_NO,             _______,             _______,          KC_NO,   _______,_______,KC_NO,   KC_NO,
                                             _______, _______, _______,             _______, _______, _______
     ),
     [SYMBOLS_RU] = LAYOUT(
         _______, _______, _______, _______, _______, _______, _______,             _______, _______, _______, _______, _______, _______, _______,
-        _______, EN_LT,   EN_GT,   EN_EQL,  EN_LCBR, EN_RCBR, _______,             _______, _______, _______, _______, _______, _______, _______,
-        _______, EN_PLUS, EN_ASTR, EN_PERC, EN_LBRC, EN_RBRC, EN_AMPR,             _______, _______, _______, _______, _______, _______, _______,
-        _______, EN_AT,   EN_DLR,  EN_HASH, EN_CIRC, EN_PIPE,                                  _______, _______, _______, _______, _______, _______,
+        _______, _______, _______, EN_LCBR, EN_RCBR, _______, _______,             _______, _______, _______, _______, _______, _______, _______,
+        _______, EN_AT,   EN_HASH, EN_LBRC, EN_RBRC, EN_AMPR, _______,             _______, _______, _______, _______, _______, _______, _______,
+        _______, EN_CIRC, EN_PIPE, EN_LT,   EN_GT,   _______,                                  _______, _______, _______, _______, _______, _______,
         _______, _______, _______, _______, _______,         _______,             _______,          _______, _______, _______, _______, _______,
                                             _______, _______, _______,             _______, _______, _______
     ),
@@ -77,7 +77,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 static const uint16_t PROGMEM english_symbols[] = {
     KC_DOT,  KC_COMM, KC_COLN, KC_GRV,  KC_QUOT, KC_QUES, KC_TILD, KC_LT,   KC_GT,   KC_EQL,  KC_LCBR, KC_RCBR, KC_PLUS,
-    KC_ASTR, KC_PERC, KC_LBRC, KC_RBRC, KC_AT,   KC_DLR,  KC_HASH, KC_CIRC, KC_PIPE, KC_AMPR, KC_SCLN, KC_DQUO, KC_BSLS,
+    KC_ASTR, KC_PERC, KC_LBRC, KC_RBRC, KC_AT,   KC_DLR,  KC_HASH, KC_CIRC, KC_PIPE, KC_AMPR, KC_SCLN, KC_DQUO, KC_MINS, KC_SLSH, KC_BSLS,
 };
 
 STATIC_ASSERT(ARRAY_SIZE(english_symbols) == EN_BSLS - EN_DOT + 1, "English symbol outputs must match their keycodes");

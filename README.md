@@ -52,12 +52,14 @@ unassigned key, underscore, and minus, matching the updated K03.
 | Position | Action |
 | --- | --- |
 | Under M | Switch EN/RU |
+| Below `/` | `$` |
 | Inner key left of H | Shift + Enter |
 | Inner key right of G | Ctrl + B |
 | Top-left key while holding Apps | Updated `hello_kotify` macro |
 | Top-right key | Hold for one second to send Cmd + Ctrl + Q (lock macOS) |
 
-The other spare bottom-row keys are unassigned. In English, the three positions
+The other spare bottom-row keys are unassigned. Minus and slash keep their base
+positions and are also available on Numbers. In English, the three positions
 after M remain silent, but two still participate in the K03 combos. Russian
 uses them for Б, Ю, and Э.
 
@@ -96,23 +98,28 @@ Hold the **right bottom-row key under L**. Numbers are on the left half.
 | W · E · R | 7 · 8 · 9 |
 | A · S · D · F | 0 · 4 · 5 · 6 |
 | X · C · V | 1 · 2 · 3 |
+| `:` · inner key immediately right | `+` · `-` |
+| T · inner key immediately right | `*` · `/` |
+| G | `=` |
+| B | `%` |
 
 Zero is on **A**, under the left pinky. These are regular number-row keycodes,
-matching the K03, rather than keypad keycodes. The right main-body keys do
-nothing on Numbers.
+matching the K03, rather than keypad keycodes. The operators send the same
+symbols in English and Russian. The right main-body keys do nothing on Numbers.
 
 ## Symbols
 
-Hold the **right bottom-row key under K**. The left half keeps the K03 symbol block:
+Hold the **right bottom-row key under K**. Symbols are on the left half:
 
 ```text
-Q  W  E  R  T       <  >  =  {  }
-A  S  D  F  G       +  *  %  [  ]
-Z  X  C  V  B       @  $  #  ^  |
+Q  W  E  R  T       ·  ·  {  }  ·
+A  S  D  F  G       @  #  [  ]  &
+Z  X  C  V  B       ^  |  <  >  ·
 ```
 
-`&` moves to the inner key right of G because Moonlander has no key beside B.
-The Russian variant sends the same symbols by temporarily selecting English.
+Dots mark unassigned keys. Dollar is on the base layers below `/`; arithmetic
+operators and percent are on Numbers. The Russian variant sends the same symbols
+by temporarily selecting English.
 The right main-body keys do nothing on Symbols.
 
 ## Nav

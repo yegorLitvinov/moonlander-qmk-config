@@ -45,6 +45,8 @@ enum custom_keycodes {
     EN_AMPR,
     EN_SCLN,
     EN_DQUO,
+    EN_MINS,
+    EN_SLSH,
     EN_BSLS,
 };
 
