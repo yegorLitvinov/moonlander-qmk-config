@@ -151,6 +151,47 @@ half. System takes priority over every other held layer.
 
 Other main-body keys do nothing on System.
 
+## RGB
+
+Hold System and use **O / P** to cycle backward / forward through four modes:
+
+| Mode | Behavior |
+| --- | --- |
+| Key roles (default) | Colors come from each key's current action. Transparent keys use their inherited action; unused keys stay dark. |
+| Heatmap | Repeated presses build brightness on each key, then fade. |
+| Quick fade | Each press lights the key for about 300 ms. Repeated presses restart the fade without building brightness. |
+| Finger zones | Fixed colors by finger, mirrored across the two halves. |
+
+Heatmap and quick fade use the active layer's color. Finger zones and key roles
+use fixed RGB palettes, scaled by the current brightness.
+
+Both thumb clusters, including the red keys, always show the active layer:
+
+| Layer | Color |
+| --- | --- |
+| English | White |
+| Russian | Blue |
+| Apps | Purple |
+| Nav | Cyan |
+| Numbers | Green |
+| Symbols (EN/RU) | Orange |
+| System | Red |
+
+The highest-priority held layer determines the indicator color. Temporary
+English input for Russian symbols does not change the selected layer's color.
+The separate status LEDs are disabled.
+
+**System + Y** toggles the main backlight. Thumb indicators stay visible, with a
+small minimum brightness. **System + U / I** adjusts brightness. Mode, backlight
+state, and brightness are saved across reconnects.
+
+The palettes are constants in [rgb.c](rgb.c). Key-role colors are assigned from
+the current keymap and need no per-key color table. Letters are white, numbers
+green, symbols yellow, modifiers blue, editing keys orange, navigation cyan,
+layer keys orange-red, shortcuts magenta, media purple, and system controls red.
+Finger zones use pink for pinkies, yellow for ring fingers, green for middle
+fingers, and cyan for index fingers.
+
 ## Combos
 
 The combo window is 50 ms. Positions below use their English base labels.
@@ -203,6 +244,8 @@ language and brightness shortcuts.
 - [keymap.c](keymap.c): physical layers, combos, language handling, and macros.
 - [keymap.h](keymap.h): layer names and custom keycodes.
 - [config.h](config.h): timing settings.
+- [rgb.c](rgb.c): RGB palettes, dynamic key roles, and thumb layer indicators.
+- [rgb_matrix_user.inc](rgb_matrix_user.inc): custom finger-zone effect.
 - [rules.mk](rules.mk): enabled QMK features.
 - [keymap.json](keymap.json): ZSA's default hardware support module.
 - [qmk-revision](qmk-revision): pinned ZSA QMK commit.

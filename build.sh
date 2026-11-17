@@ -24,7 +24,8 @@ git -C "$qmk_dir" submodule update --init --depth 1 \
 
 mkdir -p "$keymap_dir" "$repo_dir/dist"
 cp "$repo_dir/keymap.c" "$repo_dir/keymap.h" "$repo_dir/keymap.json" \
-    "$repo_dir/config.h" "$repo_dir/rules.mk" "$keymap_dir/"
+    "$repo_dir/config.h" "$repo_dir/rules.mk" "$repo_dir/rgb.c" \
+    "$repo_dir/rgb.h" "$repo_dir/rgb_matrix_user.inc" "$keymap_dir/"
 
 QMK_HOME="$qmk_dir" make -C "$qmk_dir" -j"${JOBS:-4}" zsa/moonlander/reva:egor
 cp "$qmk_dir/zsa_moonlander_reva_egor.bin" "$repo_dir/dist/moonlander-reva.bin"
