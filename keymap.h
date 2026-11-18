@@ -12,6 +12,7 @@ enum layers {
     SYMBOLS_EN,
     SYMBOLS_RU,
     SYSTEM,
+    PIANO,
 };
 
 enum custom_keycodes {
@@ -48,6 +49,8 @@ enum custom_keycodes {
     EN_MINS,
     EN_SLSH,
     EN_BSLS,
+    PIANO_KEY,
+    PIANO_NOTE,
 };
 
 #define APP(key) LGUI(LCTL(LALT(key)))

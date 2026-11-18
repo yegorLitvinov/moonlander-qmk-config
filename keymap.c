@@ -1,7 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 #include "keymap.h"
+#include "audio.h"
 #include "compiler_support.h"
 #include "keymap_russian.h"
+#include "process_audio.h"
+#include "process_music.h"
 
 // Each side keeps the K03's six main columns. The seventh column faces inward.
 // The red keys appear on the next-to-last line; the six narrow thumb keys are
@@ -13,7 +16,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,       KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_NO,           KC_NO,       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_NO,
         KC_ESC,       KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    LCTL(KC_B),      KC_NO,       KC_H,    KC_J,    KC_K,    KC_L,    KC_NO,   KC_NO,
         KC_TILD,      KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                                  KC_N,    KC_M,    UNUSED_BE,KC_NO, UNUSED_E,KC_SLSH,
-        KC_NO,        KC_NO,   MO(SYSTEM),KC_NO, KC_NO,            MO(APPS),        MO(NAV),             LANG_SWITCH,MO(SYMBOLS_EN),MO(NUMBERS),KC_NO,KC_DLR,
+        KC_NO,        PIANO_KEY,MO(SYSTEM),KC_NO, KC_NO,           MO(APPS),        MO(NAV),             LANG_SWITCH,MO(SYMBOLS_EN),MO(NUMBERS),KC_NO,KC_DLR,
                                               KC_LSFT, KC_LGUI, KC_BSPC,          KC_ENT,  KC_RCTL, KC_SPC
     ),
     [RU_BASE] = LAYOUT(
@@ -29,7 +32,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO,   APP(KC_Q),APP(KC_W),APP(KC_E),APP(KC_R),APP(KC_T),KC_NO,            KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
         KC_NO,   APP(KC_A),APP(KC_S),APP(KC_D),APP(KC_F),APP(KC_G),KC_NO,            KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
         KC_NO,   APP(KC_Z),APP(KC_X),APP(KC_C),APP(KC_V),LGUI(LSFT(KC_5)),                     KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   _______,KC_NO,   KC_NO,             _______,             _______,          KC_NO,   _______,_______,KC_NO,   KC_NO,
+        KC_NO,   _______, _______,KC_NO,   KC_NO,             _______,             _______,          KC_NO,   _______,_______,KC_NO,   KC_NO,
                                             _______, _______, _______,             _______, _______, _______
     ),
     [NAV] = LAYOUT(
@@ -37,7 +40,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,               KC_NO,   RALT(KC_LEFT),KC_PGDN,KC_PGUP,RALT(KC_RGHT),KC_NO,KC_NO,
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,               KC_NO,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_NO,   KC_NO,
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                                    LGUI(KC_LEFT),LGUI(KC_DOWN),LGUI(KC_UP),LGUI(KC_RGHT),KC_NO,KC_NO,
-        KC_NO,   KC_NO,   _______,KC_NO,   KC_NO,             _______,             _______,          KC_NO,   _______,_______,KC_NO,   KC_NO,
+        KC_NO,   _______, _______,KC_NO,   KC_NO,             _______,             _______,          KC_NO,   _______,_______,KC_NO,   KC_NO,
                                             _______, _______, _______,             _______, _______, _______
     ),
     [NUMBERS] = LAYOUT(
@@ -45,7 +48,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO,   KC_NO,   KC_7,    KC_8,    KC_9,    EN_ASTR, EN_SLSH,             KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
         KC_NO,   KC_0,    KC_4,    KC_5,    KC_6,    EN_EQL,  KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
         KC_NO,   KC_NO,   KC_1,    KC_2,    KC_3,    EN_PERC,                                  KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   _______,KC_NO,   KC_NO,             _______,             _______,          KC_NO,   _______,_______,KC_NO,   KC_NO,
+        KC_NO,   _______, _______,KC_NO,   KC_NO,             _______,             _______,          KC_NO,   _______,_______,KC_NO,   KC_NO,
                                             _______, _______, _______,             _______, _______, _______
     ),
     [SYMBOLS_EN] = LAYOUT(
@@ -53,7 +56,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO,   KC_NO,   KC_NO,   KC_LCBR, KC_RCBR, KC_NO,   KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
         KC_NO,   KC_AT,   KC_HASH, KC_LBRC, KC_RBRC, KC_AMPR, KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
         KC_NO,   KC_CIRC, KC_PIPE, KC_LT,   KC_GT,   KC_NO,                                    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   _______,KC_NO,   KC_NO,             _______,             _______,          KC_NO,   _______,_______,KC_NO,   KC_NO,
+        KC_NO,   _______, _______,KC_NO,   KC_NO,             _______,             _______,          KC_NO,   _______,_______,KC_NO,   KC_NO,
                                             _______, _______, _______,             _______, _______, _______
     ),
     [SYMBOLS_RU] = LAYOUT(
@@ -69,8 +72,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,               KC_NO,   RM_TOGG, RM_VALD, RM_VALU, RM_PREV, RM_NEXT, KC_NO,
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,               KC_NO,   KC_MPLY, KC_VOLD, KC_VOLU, KC_NO,   KC_NO,   KC_NO,
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                                    KC_NO,   KC_BRID, KC_BRIU, KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   _______,KC_NO,   KC_NO,             _______,             _______,          KC_NO,   _______,_______,KC_NO,   KC_NO,
+        KC_NO,   _______, _______,KC_NO,   KC_NO,             _______,             _______,          KC_NO,   _______,_______,KC_NO,   KC_NO,
                                             _______, _______, _______,             _______, _______, _______
+    ),
+    [PIANO] = LAYOUT(
+        PIANO_NOTE, PIANO_NOTE, PIANO_NOTE, PIANO_NOTE, PIANO_NOTE, PIANO_NOTE, PIANO_NOTE,    PIANO_NOTE, PIANO_NOTE, PIANO_NOTE, PIANO_NOTE, PIANO_NOTE, PIANO_NOTE, PIANO_NOTE,
+        PIANO_NOTE, PIANO_NOTE, PIANO_NOTE, PIANO_NOTE, PIANO_NOTE, PIANO_NOTE, PIANO_NOTE,    PIANO_NOTE, PIANO_NOTE, PIANO_NOTE, PIANO_NOTE, PIANO_NOTE, PIANO_NOTE, PIANO_NOTE,
+        PIANO_NOTE, PIANO_NOTE, PIANO_NOTE, PIANO_NOTE, PIANO_NOTE, PIANO_NOTE, PIANO_NOTE,    PIANO_NOTE, PIANO_NOTE, PIANO_NOTE, PIANO_NOTE, PIANO_NOTE, PIANO_NOTE, PIANO_NOTE,
+        PIANO_NOTE, PIANO_NOTE, PIANO_NOTE, PIANO_NOTE, PIANO_NOTE, PIANO_NOTE,                PIANO_NOTE, PIANO_NOTE, PIANO_NOTE, PIANO_NOTE, PIANO_NOTE, PIANO_NOTE,
+        PIANO_NOTE, PIANO_KEY,  PIANO_NOTE, PIANO_NOTE, PIANO_NOTE,             PIANO_NOTE,    PIANO_NOTE,             PIANO_NOTE, PIANO_NOTE, PIANO_NOTE, PIANO_NOTE, PIANO_NOTE,
+                                                    PIANO_NOTE, PIANO_NOTE, PIANO_NOTE,      PIANO_NOTE, PIANO_NOTE, PIANO_NOTE
     ),
 };
 // clang-format on
@@ -86,6 +97,20 @@ static uint8_t  english_symbols_held;
 static bool     lock_held;
 static bool     lock_sent;
 static uint16_t lock_timer;
+
+enum { PIANO_HOLD_MS = 200, PIANO_TAP_GAP_MS = 250, PIANO_LOWEST_NOTE = 36 }; // MIDI 36 is C2.
+static bool     piano_key_held;
+static uint8_t  piano_taps;
+static uint32_t piano_key_timer;
+
+// The opening vocal phrase from Adele's "Hello", two octaves up for the buzzer.
+static float hello_kotify_song[][2] = SONG(
+    ED_NOTE(_AS5), H__NOTE(_C6), M__NOTE(_REST, 56),
+    ED_NOTE(_AS5), E__NOTE(_REST), H__NOTE(_AS5)
+);
+
+// Piano pitches under A, D, G, D, A, and Z.
+static float piano_start_song[][2] = SONG(Q__NOTE(_G4), Q__NOTE(_A4), Q__NOTE(_B4), Q__NOTE(_A4), Q__NOTE(_G4), E__NOTE(_REST), Q__NOTE(_G3));
 
 static bool is_russian(void) { return (default_layer_state & (1UL << RU_BASE)) != 0; }
 
@@ -179,6 +204,9 @@ combo_t key_combos[] = {
 };
 
 bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
+    if (layer_state_is(PIANO)) {
+        return false;
+    }
     switch (combo_index) {
     case THUMB_SHIFT_ENTER:
     case THUMB_COMMAND_ENTER:
@@ -205,7 +233,55 @@ const key_override_t word_delete_override = ko_make_with_layers_negmods_and_opti
     MOD_MASK_GUI, KC_BSPC, LALT(KC_BSPC), ~0, 0, ko_options_default | ko_option_no_reregister_trigger);
 const key_override_t *key_overrides[] = {&word_delete_override};
 
+static void start_piano(void) {
+    layer_on(PIANO);
+    PLAY_SONG(piano_start_song);
+}
+
+static void stop_piano(void) {
+    audio_stop_all();
+    layer_off(PIANO);
+}
+
+static void process_piano_key(bool pressed) {
+    if (pressed) {
+        if (layer_state_is(PIANO)) {
+            stop_piano();
+        } else {
+            if (timer_elapsed32(piano_key_timer) >= PIANO_TAP_GAP_MS) {
+                piano_taps = 0;
+            }
+            piano_key_held  = true;
+            piano_key_timer = timer_read32();
+        }
+    } else if (piano_key_held) {
+        piano_key_held = false;
+        if (layer_state_is(PIANO)) {
+            stop_piano();
+        } else if (timer_elapsed32(piano_key_timer) >= PIANO_HOLD_MS) {
+            piano_taps = 0;
+        } else if (++piano_taps == 3) {
+            piano_taps = 0;
+            start_piano();
+        } else {
+            piano_key_timer = timer_read32();
+        }
+    }
+}
+
 bool pre_process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (keycode == PIANO_KEY) {
+        process_piano_key(record->event.pressed);
+        return false;
+    }
+    if (record->event.pressed) {
+        piano_taps = 0;
+        if (piano_key_held && !layer_state_is(PIANO)) {
+            start_piano();
+            // QMK looks up this key again after the layer changes.
+            return true;
+        }
+    }
     // Handle the red keys before QMK buffers them for combos.
     if (keycode == MO(APPS) || keycode == MO(NAV)) {
         const uint8_t layer = QK_MOMENTARY_GET_LAYER(keycode);
@@ -219,6 +295,7 @@ bool pre_process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 static void hello_kotify(void) {
+    PLAY_SONG(hello_kotify_song);
     const saved_mods_t mods = save_and_clear_mods();
     select_input_source(false);
     tap_code16(APP(KC_G));
@@ -262,6 +339,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
 
     switch (keycode) {
+    case PIANO_NOTE: {
+        const uint8_t note = PIANO_LOWEST_NOTE + music_map[record->event.key.row][record->event.key.col];
+        if (record->event.pressed) {
+            if (audio_is_playing_melody()) {
+                audio_stop_all();
+            }
+            process_audio_noteon(note);
+        } else if (layer_state_is(PIANO)) {
+            process_audio_noteoff(note);
+        }
+        return false;
+    }
     case MO(APPS):
     case MO(NAV):
         // The physical press and release already updated the layer.
@@ -301,6 +390,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 void matrix_scan_user(void) {
+    if (piano_key_held && !layer_state_is(PIANO) && timer_elapsed32(piano_key_timer) >= PIANO_HOLD_MS) {
+        piano_taps = 0;
+        start_piano();
+    }
     if (lock_held && !lock_sent && timer_elapsed(lock_timer) >= 1000) {
         const saved_mods_t mods = save_and_clear_mods();
         tap_code16(LGUI(LCTL(KC_Q)));

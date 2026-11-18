@@ -4,14 +4,13 @@ Custom QMK layout for Moonlander Mark I **revision A** (`zsa/moonlander/reva`).
 Adapted from the K03 English/Russian layout in `ergohaven-zmk-config`.
 Imported K03 source revision: `f750cfc`.
 
-All layer activation keys are momentary: their layers are active only while
-held. Keep this behavior for future layout changes. EN/RU language switching is
-separate.
+Hold a layer key to use its layer. Piano can also stay on after a triple tap.
+EN/RU language switching is separate.
 
 ## Layer keys
 
-Bottom-row keys activate a layer on the **opposite half**. Thumb-cluster keys
-activate a layer on the **same half**. Keep these rules for future layout changes.
+Bottom-row keys activate a layer on the **opposite half**, except Piano, which
+uses both halves. Thumb-cluster keys activate a layer on the **same half**.
 
 | Activation key | Layer | Layer actions |
 | --- | --- | --- |
@@ -20,11 +19,12 @@ activate a layer on the **same half**. Keep these rules for future layout change
 | Bottom row under S, left | System | Right half |
 | Left red thumb key | Apps | Left half |
 | Right red thumb key | Nav | Right half |
+| Second key from the left on the bottom row, under Z | Piano | Both halves |
 
-Unassigned keys do nothing on every layer. The five layer activation keys and
-the six narrow thumb keys remain available on every layer. Holding multiple
-layer keys uses the highest-priority held layer: System, Symbols, Numbers, Nav,
-then Apps. Releasing it returns to the next held layer or the base layer.
+Unassigned keys do nothing. Outside Piano, the layer activation keys and the
+six narrow thumb keys remain available. If several layer keys are held, the
+priority is System, Symbols, Numbers, Nav, then Apps. Piano takes priority
+over all of them.
 
 ## Thumb keys
 
@@ -46,7 +46,7 @@ layer drops when the combo fires. Use the bottom-row key under S for System.
 | Right red + Right Control + Space | Hold Right Alt + Right Control |
 | Left red + Command + Backspace | Command + Backspace |
 
-Press the thumb keys together using the 50 ms combo window on any layer.
+Press the thumb keys together using the 50 ms combo window outside Piano.
 Right red + Ctrl + Enter takes priority over Ctrl + Enter.
 
 Command + Backspace sends **Alt + Backspace** to delete a word. Press left red,
@@ -148,7 +148,7 @@ their own layer; the left main-body keys do nothing on Nav.
 ## System
 
 Hold the **left bottom-row key under S**. All System actions are on the right
-half. System takes priority over every other held layer.
+half.
 
 | Physical key | Action |
 | --- | --- |
@@ -161,6 +161,20 @@ half. System takes priority over every other held layer.
 | Top-right key | Enter bootloader mode for flashing |
 
 Other main-body keys do nothing on System.
+
+## Sound and Piano
+
+The keyboard plays a three-part R2-D2-style chirp at startup, the opening
+phrase of Adele's “Hello” when the `hello_kotify` macro starts, and two falling
+notes before entering flashing mode.
+
+- Hold the **bottom-row key under Z** to play Piano. It activates after 200 ms
+  or as soon as you press another key. Release it to return to typing.
+- Tap the same key three times quickly to keep Piano on. Tap it once to exit.
+- Entering Piano plays the notes under **A D G D A Z**, with a pause before Z.
+  Playing a note skips the rest of the tune.
+- In Piano, all other keys play notes on the keyboard's speaker. Notes rise
+  from left to right and from the bottom rows to the top.
 
 ## RGB
 
@@ -187,8 +201,9 @@ With RGB on, both thumb clusters show the active layer:
 | Numbers | Green |
 | Symbols (EN/RU) | Orange |
 | System | Red |
+| Piano | Yellow |
 
-The highest-priority held layer determines the indicator color. Temporary
+The highest-priority active layer determines the indicator color. Temporary
 English input for Russian symbols does not change the selected layer's color.
 The separate status LEDs are disabled.
 

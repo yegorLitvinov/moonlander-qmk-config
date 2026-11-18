@@ -15,6 +15,7 @@ static const rgb_t layer_colors[] = {
     [SYMBOLS_EN] = {255, 128, 0},
     [SYMBOLS_RU] = {255, 128, 0},
     [SYSTEM]     = {255, 0, 0},
+    [PIANO]      = {255, 224, 0},
 };
 // clang-format on
 
@@ -73,7 +74,7 @@ static enum key_role key_role(uint16_t keycode, uint8_t source_layer) {
     if (keycode == KC_NO || keycode == KC_TRNS || keycode == UNUSED_BE || keycode == UNUSED_E) {
         return UNUSED;
     }
-    if (IS_QK_MOMENTARY(keycode) || keycode == LANG_SWITCH) {
+    if (IS_QK_MOMENTARY(keycode) || keycode == LANG_SWITCH || keycode == PIANO_KEY) {
         return LAYER;
     }
     if (keycode >= EN_DOT && keycode <= EN_BSLS) {
@@ -123,7 +124,7 @@ static enum key_role key_role(uint16_t keycode, uint8_t source_layer) {
     if (keycode >= KC_MINUS && keycode <= KC_SLASH) {
         return SYMBOL;
     }
-    if (IS_CONSUMER_KEYCODE(keycode)) {
+    if (IS_CONSUMER_KEYCODE(keycode) || keycode == PIANO_NOTE) {
         return MEDIA;
     }
     return EDITING;

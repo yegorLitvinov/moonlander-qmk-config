@@ -5,6 +5,14 @@
 #define COMBO_SHOULD_TRIGGER
 #define TAP_CODE_DELAY 30
 
+#define NO_MUSIC_MODE
+// Three chirps with clear pauses between them.
+#define STARTUP_SONG SONG( \
+    S__NOTE(_G6), E__NOTE(_D7), S__NOTE(_B6), M__NOTE(_REST, 20), \
+    E__NOTE(_E7), S__NOTE(_C7), M__NOTE(_REST, 12), \
+    S__NOTE(_G6), E__NOTE(_A6), Q__NOTE(_D7))
+#define GOODBYE_SONG SONG(S__NOTE(_E5), E__NOTE(_C5))
+
 // Command + Backspace should work as soon as either key completes the shortcut.
 #define KEY_OVERRIDE_REPEAT_DELAY 0
 
