@@ -135,11 +135,11 @@ The right main-body keys do nothing on Symbols.
 
 ## Nav
 
-Hold the **right red key**. Navigation stays on the right half. Symbols have
-their own layer; the left main-body keys do nothing on Nav.
+Hold the **right red key**. Navigation and media controls are on the right half.
 
-| Physical keys | Navigation output |
+| Physical keys | Action |
 | --- | --- |
+| Leftmost column, top to bottom | Play/pause · Volume up · Volume down |
 | Y · U · I · O | Right Alt + Left · Page Down · Page Up · Right Alt + Right |
 | H · J · K · L | Left · Down · Up · Right |
 | N · M · next key · next key | Cmd + Left · Cmd + Down · Cmd + Up · Cmd + Right |
@@ -152,8 +152,6 @@ half.
 
 | Physical key | Action |
 | --- | --- |
-| H | Play/pause |
-| J / K | Volume down/up |
 | M / key right of M | Screen brightness down/up |
 | Y | RGB on/off |
 | U / I | RGB brightness down/up |
