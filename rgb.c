@@ -60,8 +60,12 @@ static rgb_t scale_color(rgb_t color, uint8_t brightness) {
 
 static rgb_t layer_color(void) { return layer_colors[get_highest_layer(layer_state | default_layer_state)]; }
 
-// Built-in effects keep their brightness animation and use the layer's RGB color.
-rgb_t rgb_matrix_hsv_to_rgb(hsv_t hsv) { return scale_color(layer_color(), hsv.v); }
+rgb_t rgb_matrix_hsv_to_rgb(hsv_t hsv) {
+    if (rgb_matrix_get_mode() == RGB_MATRIX_TYPING_HEATMAP) {
+        return hsv_to_rgb(hsv);
+    }
+    return scale_color(layer_color(), hsv.v);
+}
 
 static bool is_thumb_row(uint8_t row) { return row == 5 || row == 11; }
 
@@ -140,11 +144,14 @@ void render_finger_zones(uint8_t led_min, uint8_t led_max) {
 }
 
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+    if (rgb_matrix_get_flags() == LED_FLAG_NONE) {
+        return false;
+    }
+
     const uint8_t brightness = rgb_matrix_get_val();
-    // Keep indicators visible even when the main backlight is off or at zero.
+    // Keep indicators visible at low brightness while RGB is on.
     const rgb_t thumb_color = scale_color(layer_color(), MAX(brightness, 16));
-    const bool  roles_enabled =
-        rgb_matrix_get_mode() == RGB_MATRIX_SOLID_COLOR && rgb_matrix_get_flags() != LED_FLAG_NONE;
+    const bool  roles_enabled = rgb_matrix_get_mode() == RGB_MATRIX_SOLID_COLOR;
 
     for (uint8_t row = 0; row < MATRIX_ROWS; ++row) {
         for (uint8_t col = 0; col < MATRIX_COLS; ++col) {

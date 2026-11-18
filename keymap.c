@@ -205,6 +205,19 @@ const key_override_t word_delete_override = ko_make_with_layers_negmods_and_opti
     MOD_MASK_GUI, KC_BSPC, LALT(KC_BSPC), ~0, 0, ko_options_default | ko_option_no_reregister_trigger);
 const key_override_t *key_overrides[] = {&word_delete_override};
 
+bool pre_process_record_user(uint16_t keycode, keyrecord_t *record) {
+    // Handle the red keys before QMK buffers them for combos.
+    if (keycode == MO(APPS) || keycode == MO(NAV)) {
+        const uint8_t layer = QK_MOMENTARY_GET_LAYER(keycode);
+        if (record->event.pressed) {
+            layer_on(layer);
+        } else {
+            layer_off(layer);
+        }
+    }
+    return true;
+}
+
 static void hello_kotify(void) {
     const saved_mods_t mods = save_and_clear_mods();
     select_input_source(false);
@@ -249,6 +262,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
 
     switch (keycode) {
+    case MO(APPS):
+    case MO(NAV):
+        // The physical press and release already updated the layer.
+        return false;
+    case LGUI(KC_BSPC):
+    case LGUI(KC_ENT):
+    case KC_RALT:
+        // When a combo uses a red key, drop its layer before sending the shortcut.
+        if (IS_COMBOEVENT(record->event) && record->event.pressed) {
+            layer_off(keycode == LGUI(KC_BSPC) ? APPS : NAV);
+        }
+        return true;
     case LANG_SWITCH:
         if (record->event.pressed) {
             set_language(!is_russian());

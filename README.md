@@ -35,8 +35,8 @@ Positions below run left to right as you look down at the keyboard.
 | Left | Shift · Command · Backspace | Hold for Apps |
 | Right | Enter · Right Control · Space | Hold for Nav |
 
-Each red key activates its layer alone. Holding both red keys does not activate
-System; use the bottom-row key under S.
+Each red key activates its layer on press. If a thumb combo uses that key, the
+layer drops when the combo fires. Use the bottom-row key under S for System.
 
 | Thumb keys pressed together | Output |
 | --- | --- |
@@ -169,14 +169,14 @@ Hold System and use **O / P** to cycle backward / forward through four modes:
 | Mode | Behavior |
 | --- | --- |
 | Key roles (default) | Colors come from each key's current action. Transparent keys use their inherited action; unused keys stay dark. |
-| Heatmap | Repeated presses build brightness on each key, then fade. |
+| Heatmap | Repeated presses build brightness and move the key's color from blue through green to red. The effect fades over time. |
 | Quick fade | Each press lights the key for about 300 ms. Repeated presses restart the fade without building brightness. |
 | Finger zones | Fixed colors by finger, mirrored across the two halves. |
 
-Heatmap and quick fade use the active layer's color. Finger zones and key roles
+Quick fade uses the active layer's color. Finger zones and key roles
 use fixed RGB palettes, scaled by the current brightness.
 
-Both thumb clusters, including the red keys, always show the active layer:
+With RGB on, both thumb clusters show the active layer:
 
 | Layer | Color |
 | --- | --- |
@@ -192,9 +192,9 @@ The highest-priority held layer determines the indicator color. Temporary
 English input for Russian symbols does not change the selected layer's color.
 The separate status LEDs are disabled.
 
-**System + Y** toggles the main backlight. Thumb indicators stay visible, with a
-small minimum brightness. **System + U / I** adjusts brightness. Mode, backlight
-state, and brightness are saved across reconnects.
+**System + Y** toggles all RGB, including the thumb indicators.
+**System + U / I** adjusts brightness. Mode, RGB state, and brightness are saved
+across reconnects.
 
 The palettes are constants in [rgb.c](rgb.c). Key-role colors are assigned from
 the current keymap and need no per-key color table. Letters are white, numbers
