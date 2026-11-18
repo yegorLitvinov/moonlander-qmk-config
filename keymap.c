@@ -11,10 +11,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [EN_BASE] = LAYOUT(
         KC_NO,        KC_UNDS, KC_MINS, KC_DOT,  KC_COMM, KC_COLN, KC_NO,           KC_NO,       KC_GRV,  KC_QUOT, KC_QUES, KC_LPRN, KC_RPRN, HOLD_LOCK,
         KC_TAB,       KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_NO,           KC_NO,       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_NO,
-        KC_ESC,       KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    LCTL(KC_B),      LSFT(KC_ENT),KC_H,    KC_J,    KC_K,    KC_L,    KC_NO,   KC_ENT,
+        KC_ESC,       KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    LCTL(KC_B),      KC_NO,       KC_H,    KC_J,    KC_K,    KC_L,    KC_NO,   KC_NO,
         KC_TILD,      KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                                  KC_N,    KC_M,    UNUSED_BE,KC_NO, UNUSED_E,KC_SLSH,
         KC_NO,        KC_NO,   MO(SYSTEM),KC_NO, KC_NO,            MO(APPS),        MO(NAV),             LANG_SWITCH,MO(SYMBOLS_EN),MO(NUMBERS),KC_NO,KC_DLR,
-                                              KC_LSFT, KC_LGUI, KC_BSPC,          KC_RALT, KC_RCTL, KC_SPC
+                                              KC_LSFT, KC_LGUI, KC_BSPC,          KC_ENT,  KC_RCTL, KC_SPC
     ),
     [RU_BASE] = LAYOUT(
         _______, _______, _______, EN_DOT,  EN_COMM, EN_COLN, _______,             _______, EN_GRV,  EN_QUOT, EN_QUES, _______, _______, _______,
@@ -144,6 +144,10 @@ enum combos {
     CYRILLIC_YO,
     EXCLAMATION,
     BACKSLASH,
+    THUMB_SHIFT_ENTER,
+    THUMB_COMMAND_ENTER,
+    THUMB_ALT,
+    THUMB_COMMAND_BACKSPACE,
 };
 
 const uint16_t PROGMEM ha_combo[] = {KC_U, KC_I, COMBO_END};
@@ -153,6 +157,10 @@ const uint16_t PROGMEM double_quote_combo[] = {KC_GRV, KC_QUOT, COMBO_END};
 const uint16_t PROGMEM yo_combo[] = {KC_R, KC_T, COMBO_END};
 const uint16_t PROGMEM exclamation_combo[] = {KC_QUOT, KC_QUES, COMBO_END};
 const uint16_t PROGMEM backslash_combo[] = {KC_SLSH, UNUSED_E, COMBO_END};
+const uint16_t PROGMEM thumb_shift_enter_combo[] = {KC_RCTL, KC_ENT, COMBO_END};
+const uint16_t PROGMEM thumb_command_enter_combo[] = {MO(NAV), KC_RCTL, KC_ENT, COMBO_END};
+const uint16_t PROGMEM thumb_alt_combo[] = {MO(NAV), KC_SPC, COMBO_END};
+const uint16_t PROGMEM thumb_command_backspace_combo[] = {MO(APPS), KC_LGUI, KC_BSPC, COMBO_END};
 
 combo_t key_combos[] = {
     [CYRILLIC_HA] = COMBO(ha_combo, RU_HA),
@@ -164,9 +172,20 @@ combo_t key_combos[] = {
     [CYRILLIC_YO] = COMBO(yo_combo, KC_BSLS),
     [EXCLAMATION] = COMBO(exclamation_combo, KC_EXLM),
     [BACKSLASH] = COMBO(backslash_combo, EN_BSLS),
+    [THUMB_SHIFT_ENTER] = COMBO(thumb_shift_enter_combo, LSFT(KC_ENT)),
+    [THUMB_COMMAND_ENTER] = COMBO(thumb_command_enter_combo, LGUI(KC_ENT)),
+    [THUMB_ALT] = COMBO(thumb_alt_combo, KC_RALT),
+    [THUMB_COMMAND_BACKSPACE] = COMBO(thumb_command_backspace_combo, LGUI(KC_BSPC)),
 };
 
 bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
+    switch (combo_index) {
+    case THUMB_SHIFT_ENTER:
+    case THUMB_COMMAND_ENTER:
+    case THUMB_ALT:
+    case THUMB_COMMAND_BACKSPACE:
+        return true;
+    }
     const uint8_t layer = get_highest_layer(layer_state | default_layer_state);
     if (layer != EN_BASE && layer != RU_BASE) {
         return false;

@@ -33,27 +33,38 @@ Positions below run left to right as you look down at the keyboard.
 | Side | Three narrow keys | Red key above them |
 | --- | --- | --- |
 | Left | Shift · Command · Backspace | Hold for Apps |
-| Right | Right Alt · Right Control · Space | Hold for Nav |
+| Right | Enter · Right Control · Space | Hold for Nav |
 
-Each red key activates its layer alone. Shift and Space keep their normal
-actions, including while a red key is held. Holding both red keys does not
-activate System; use the bottom-row key under S.
+Each red key activates its layer alone. Holding both red keys does not activate
+System; use the bottom-row key under S.
 
-Command + Backspace sends **Alt + Backspace** to delete a word. Releasing Command
-first does not send an extra plain Backspace.
+| Thumb keys pressed together | Output |
+| --- | --- |
+| Right Control + Enter | Shift + Enter |
+| Right red + Right Control + Enter | Command + Enter |
+| Right red + Space | Hold Right Alt |
+| Right red + Right Control + Space | Hold Right Alt + Right Control |
+| Left red + Command + Backspace | Command + Backspace |
+
+Press the thumb keys together using the 50 ms combo window on any layer.
+Right red + Ctrl + Enter takes priority over Ctrl + Enter.
+
+Command + Backspace sends **Alt + Backspace** to delete a word. Press left red,
+Command, and Backspace together for Finder file deletion or whole-line deletion.
 
 ## Base layers
 
 English and Russian keep the K03's main key positions, including its punctuation
-row, Tab, Escape, Enter, and slash. The extra Backspace to the right of P is
-disabled; use the left thumb Backspace. The punctuation row starts with an
-unassigned key, underscore, and minus, matching the updated K03.
+row, Tab, Escape, and slash. Enter is on the right thumb. Its former position at
+the far right of the home row and the former Shift + Enter key left of H are
+unassigned. The extra Backspace to the right of P is disabled; use the left thumb
+Backspace. The punctuation row starts with an unassigned key, underscore, and
+minus, matching the updated K03.
 
 | Position | Action |
 | --- | --- |
 | Under M | Switch EN/RU |
 | Below `/` | `$` |
-| Inner key left of H | Shift + Enter |
 | Inner key right of G | Ctrl + B |
 | Top-left key while holding Apps | Updated `hello_kotify` macro |
 | Top-right key | Hold for one second to send Cmd + Ctrl + Q (lock macOS) |
@@ -206,8 +217,8 @@ The combo window is 50 ms. Positions below use their English base labels.
 | M + key immediately to its right | Ъ | RU |
 | R + T | Original K03 Ё binding (`KC_BSLS`) | RU |
 
-Letter and punctuation combos work only on the base layers. Layer activation
-uses single keys, with no thumb combos.
+Letter and punctuation combos work only on the base layers. Thumb combos work
+on every layer. The red keys still activate their layers when held alone.
 
 ## Local build
 
