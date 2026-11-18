@@ -109,10 +109,10 @@ Hold the **right bottom-row key under L**. Numbers are on the left half.
 | W · E · R | 7 · 8 · 9 |
 | A · S · D · F | 0 · 4 · 5 · 6 |
 | X · C · V | 1 · 2 · 3 |
-| `:` · inner key immediately right | `+` · `-` |
+| `:` | `%` |
 | T · inner key immediately right | `*` · `/` |
-| G | `=` |
-| B | `%` |
+| G · inner key immediately right | `+` · `-` |
+| B | `=` |
 
 Zero is on **A**, under the left pinky. These are regular number-row keycodes,
 matching the K03, rather than keypad keycodes. The operators send the same
