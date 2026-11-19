@@ -6,7 +6,7 @@
 #include "process_audio.h"
 #include "process_music.h"
 
-// Each side keeps the K03's six main columns. The seventh column faces inward.
+// Each half has six main columns and a seventh column facing inward.
 // The red keys appear on the next-to-last line; the six narrow thumb keys are
 // last.
 // clang-format off
@@ -137,7 +137,7 @@ static void restore_mods(saved_mods_t mods) {
 static void select_input_source(bool russian) {
     const saved_mods_t mods = save_and_clear_mods();
     tap_code16(russian ? LCTL(LSFT(KC_2)) : LCTL(LSFT(KC_1)));
-    // Match the K03's language-switch delay before sending the next symbol.
+    // Give the computer time to switch input sources before sending the next symbol.
     wait_ms(TAP_CODE_DELAY);
     restore_mods(mods);
 }
@@ -198,8 +198,6 @@ combo_t key_combos[] = {
     [PLAIN_COMMA] = COMBO(plain_comma_combo, EN_COMM),
     [SEMICOLON] = COMBO(semicolon_combo, EN_SCLN),
     [DOUBLE_QUOTE] = COMBO(double_quote_combo, EN_DQUO),
-    // The K03 uses Backslash for this combo, rather than the Russian PC Ё
-    // alias.
     [CYRILLIC_YO] = COMBO(yo_combo, KC_BSLS),
     [EXCLAMATION] = COMBO(exclamation_combo, KC_EXLM),
     [BACKSLASH] = COMBO(backslash_combo, EN_BSLS),

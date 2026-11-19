@@ -1,8 +1,7 @@
-# Moonlander K03 layout
+# Moonlander English/Russian layout
 
 Custom QMK layout for Moonlander Mark I **revision A** (`zsa/moonlander/reva`).
-Adapted from the K03 English/Russian layout in `ergohaven-zmk-config`.
-Imported K03 source revision: `f750cfc`.
+Adapted from `ergohaven-zmk-config` at revision `f750cfc`.
 
 Hold a layer key to use its layer. Piano can also stay on after a triple tap.
 EN/RU language switching is separate.
@@ -56,11 +55,9 @@ Command, and Backspace together for Finder file deletion or whole-line deletion.
 
 ## Base layers
 
-English and Russian keep the K03's main key positions, including its punctuation
-row, Tab, Escape, and slash. Enter is on the right thumb. Its former position at
-the far right of the home row is unassigned. Use the left thumb Backspace. The
-extra Backspace to the right of P is disabled. The punctuation row starts with
-an unassigned key, underscore, and minus, matching the updated K03.
+Enter is on the right thumb and Backspace is on the left thumb. The far-right
+key on the home row and the key right of P are unassigned. The punctuation row
+starts with an unassigned key, underscore, and minus.
 
 | Position | Action |
 | --- | --- |
@@ -81,17 +78,15 @@ right of M and `/` are blank in English and type Ю and Э in Russian.
 
 ### Language switching
 
-The computer must have these same shortcuts configured as with the K03:
-
-- **Ctrl + Shift + 1:** select English.
-- **Ctrl + Shift + 2:** select Russian.
+Configure **Ctrl + Shift + 1** to select English and **Ctrl + Shift + 2** to
+select Russian on the computer.
 
 The keyboard starts on its English base layer. Keep the computer's input source
 in English when connecting it. Each language key selects the keyboard layer
 and the computer's input source.
 
-Russian letters keep the K03's HID keycodes. English symbols temporarily select
-English while held, then restore Russian after the last symbol is released.
+English symbols temporarily select English while held, then restore Russian
+after the last symbol is released.
 Held modifiers are preserved around input-source shortcuts. The `hello_kotify`
 macro searches for `kotify ser`, then sends the original greeting. It restores
 the current keyboard language when finished.
@@ -100,10 +95,8 @@ the current keyboard language when finished.
 
 Hold the **left red key**.
 
-The left side keeps the K03 application shortcuts: Cmd + Ctrl + Alt with
-Q/W/E/R/T, A/S/D/F/G, and Z/X/C/V. B sends Cmd + Shift + 5.
-The top-left key runs the `hello_kotify` macro, matching its move off the K03 base
-layer. Numbers have their own layer; the right main-body keys do nothing on Apps.
+Q/W/E/R/T, A/S/D/F/G, and Z/X/C/V send their letters with Cmd + Ctrl + Alt.
+B sends Cmd + Shift + 5. The top-left key runs the `hello_kotify` macro.
 
 ## Numbers
 
@@ -119,9 +112,8 @@ Hold the **right bottom-row key under L**. Numbers are on the left half.
 | G · inner key immediately right | `+` · `-` |
 | B | `=` |
 
-Zero is on **A**, under the left pinky. These are regular number-row keycodes,
-matching the K03, rather than keypad keycodes. The operators send the same
-symbols in English and Russian. The right main-body keys do nothing on Numbers.
+Zero is on **A**, under the left pinky. The digits use regular number-row
+keycodes. The operators send the same symbols in English and Russian.
 
 ## Symbols
 
@@ -232,7 +224,7 @@ The combo window is 50 ms. Positions below use their English base labels.
 | `/` + key immediately to its left | Backslash | EN/RU |
 | U + I | Х | RU |
 | M + key immediately to its right | Ъ | RU |
-| R + T | Original K03 Ё binding (`KC_BSLS`) | RU |
+| R + T | Ё via the Backslash keycode (`KC_BSLS`) | RU |
 
 Letter and punctuation combos work only on the base layers. Thumb combos work
 on every layer. The red keys still activate their layers when held alone.
