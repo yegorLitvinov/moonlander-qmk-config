@@ -35,11 +35,13 @@ Positions below run left to right as you look down at the keyboard.
 | Left | Shift · Command · Backspace | Hold for Apps |
 | Right | Enter · Right Control · Space | Hold for Nav |
 
-Each red key activates its layer on press. If a thumb combo uses that key, the
-layer drops when the combo fires. Use the bottom-row key under S for System.
+Holding a red key on its own activates its layer after the 50 ms combo window.
+A red key used in a combo leaves its layer off. Use the bottom-row key under S
+for System.
 
 | Thumb keys pressed together | Output |
 | --- | --- |
+| Left Shift + left red | Shift for the next key |
 | Right Control + Enter | Shift + Enter |
 | Right red + Right Control + Enter | Command + Enter |
 | Right red + Space | Hold Right Alt |
@@ -56,23 +58,26 @@ Command, and Backspace together for Finder file deletion or whole-line deletion.
 
 English and Russian keep the K03's main key positions, including its punctuation
 row, Tab, Escape, and slash. Enter is on the right thumb. Its former position at
-the far right of the home row and the former Shift + Enter key left of H are
-unassigned. The extra Backspace to the right of P is disabled; use the left thumb
-Backspace. The punctuation row starts with an unassigned key, underscore, and
-minus, matching the updated K03.
+the far right of the home row is unassigned. Use the left thumb Backspace. The
+extra Backspace to the right of P is disabled. The punctuation row starts with
+an unassigned key, underscore, and minus, matching the updated K03.
 
 | Position | Action |
 | --- | --- |
-| Under M | Switch EN/RU |
-| Below `/` | `$` |
+| Under V | Select English |
+| Under M | Select Russian |
+| Left of the backtick | `$` |
+| Right of `:` | `@` |
+| Top-row comma | Comma followed by a space. With a modifier, acts as a regular comma key. |
+| Right of M | Plain comma in English, Б in Russian |
 | Inner key right of G | Ctrl + B |
+| Left of H | Cmd + Space |
 | Top-left key while holding Apps | Updated `hello_kotify` macro |
 | Top-right key | Hold for one second to send Cmd + Ctrl + Q (lock macOS) |
 
 The other spare bottom-row keys are unassigned. Minus and slash keep their base
-positions and are also available on Numbers. In English, the three positions
-after M remain silent, but two still participate in the K03 combos. Russian
-uses them for Б, Ю, and Э.
+positions and are also available on Numbers. The two keys between the comma
+right of M and `/` are blank in English and type Ю and Э in Russian.
 
 ### Language switching
 
@@ -82,7 +87,7 @@ The computer must have these same shortcuts configured as with the K03:
 - **Ctrl + Shift + 2:** select Russian.
 
 The keyboard starts on its English base layer. Keep the computer's input source
-in English when connecting it. Switching EN/RU changes both the keyboard layer
+in English when connecting it. Each language key selects the keyboard layer
 and the computer's input source.
 
 Russian letters keep the K03's HID keycodes. English symbols temporarily select
@@ -123,14 +128,13 @@ symbols in English and Russian. The right main-body keys do nothing on Numbers.
 Hold the **right bottom-row key under K**. Symbols are on the left half:
 
 ```text
-Q  W  E  R  T       ·  ·  {  }  ·
-A  S  D  F  G       @  #  [  ]  &
-Z  X  C  V  B       ^  |  <  >  ·
+Q  W  E  R  T       ·  &  {  }  ·
+A  S  D  F  G       #  |  [  ]  ·
+Z  X  C  V  B       ·  ^  <  >  ·
 ```
 
-Dots mark unassigned keys. Dollar is on the base layers below `/`; arithmetic
-operators and percent are on Numbers. The Russian variant sends the same symbols
-by temporarily selecting English.
+Dots mark unassigned keys. The Russian variant sends the same symbols by
+temporarily selecting English.
 The right main-body keys do nothing on Symbols.
 
 ## Nav
@@ -162,15 +166,13 @@ Other main-body keys do nothing on System.
 
 ## Sound and Piano
 
-The keyboard plays a three-part R2-D2-style chirp at startup, the opening
-phrase of Adele's “Hello” when the `hello_kotify` macro starts, and two falling
-notes before entering flashing mode.
+At startup, the keyboard plays the Piano notes under **A D G D A Z**, with a
+pause before Z. It plays the opening phrase of Adele's “Hello” when the
+`hello_kotify` macro starts and two falling notes before entering flashing mode.
 
 - Hold the **bottom-row key under Z** to play Piano. It activates after 200 ms
   or as soon as you press another key. Release it to return to typing.
 - Tap the same key three times quickly to keep Piano on. Tap it once to exit.
-- Entering Piano plays the notes under **A D G D A Z**, with a pause before Z.
-  Playing a note skips the rest of the tune.
 - In Piano, all other keys play notes on the keyboard's speaker. Notes rise
   from left to right and from the bottom rows to the top.
 
@@ -222,9 +224,11 @@ The combo window is 50 ms. Positions below use their English base labels.
 
 | Keys pressed together | Output | Language |
 | --- | --- | --- |
-| Top-row `.` + `,` | `;` | EN/RU |
-| Top-row grave + quote | `"` | EN/RU |
-| Top-row quote + `?` | `!` | EN/RU |
+| Top-row `.` + `-` | Period, space, then Shift for the next key | EN/RU |
+| Top-row `,` + `.` | `,` | EN/RU |
+| Top-row `,` + `:` | `;` | EN/RU |
+| Top-row quote + `?` | `"` | EN/RU |
+| Top-row `?` + `(` | `!` | EN/RU |
 | `/` + key immediately to its left | Backslash | EN/RU |
 | U + I | Х | RU |
 | M + key immediately to its right | Ъ | RU |

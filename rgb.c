@@ -71,13 +71,13 @@ rgb_t rgb_matrix_hsv_to_rgb(hsv_t hsv) {
 static bool is_thumb_row(uint8_t row) { return row == 5 || row == 11; }
 
 static enum key_role key_role(uint16_t keycode, uint8_t source_layer) {
-    if (keycode == KC_NO || keycode == KC_TRNS || keycode == UNUSED_BE || keycode == UNUSED_E) {
+    if (keycode == KC_NO || keycode == KC_TRNS || keycode == UNUSED_E) {
         return UNUSED;
     }
-    if (IS_QK_MOMENTARY(keycode) || keycode == LANG_SWITCH || keycode == PIANO_KEY) {
+    if (IS_QK_MOMENTARY(keycode) || keycode == LANG_EN || keycode == LANG_RU || keycode == PIANO_KEY) {
         return LAYER;
     }
-    if (keycode >= EN_DOT && keycode <= EN_BSLS) {
+    if ((keycode >= EN_DOT && keycode <= EN_BSLS) || keycode == COMMA_SPACE) {
         return SYMBOL;
     }
     if (keycode == HELLO_KOTIFY) {

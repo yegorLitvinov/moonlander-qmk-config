@@ -16,10 +16,10 @@ enum layers {
 };
 
 enum custom_keycodes {
-    LANG_SWITCH = SAFE_RANGE,
+    LANG_EN = SAFE_RANGE,
+    LANG_RU,
     HELLO_KOTIFY,
     HOLD_LOCK,
-    UNUSED_BE,
     UNUSED_E,
     EN_DOT,
     EN_COMM,
@@ -51,6 +51,7 @@ enum custom_keycodes {
     EN_BSLS,
     PIANO_KEY,
     PIANO_NOTE,
+    COMMA_SPACE,
 };
 
 #define APP(key) LGUI(LCTL(LALT(key)))

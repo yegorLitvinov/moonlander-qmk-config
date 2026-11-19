@@ -12,19 +12,19 @@
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [EN_BASE] = LAYOUT(
-        KC_NO,        KC_UNDS, KC_MINS, KC_DOT,  KC_COMM, KC_COLN, KC_NO,           KC_NO,       KC_GRV,  KC_QUOT, KC_QUES, KC_LPRN, KC_RPRN, HOLD_LOCK,
+        KC_NO,        KC_UNDS, KC_MINS, KC_DOT,  COMMA_SPACE, KC_COLN, KC_AT,       KC_DLR,      KC_GRV,  KC_QUOT, KC_QUES, KC_LPRN, KC_RPRN, HOLD_LOCK,
         KC_TAB,       KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_NO,           KC_NO,       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_NO,
-        KC_ESC,       KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    LCTL(KC_B),      KC_NO,       KC_H,    KC_J,    KC_K,    KC_L,    KC_NO,   KC_NO,
-        KC_TILD,      KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                                  KC_N,    KC_M,    UNUSED_BE,KC_NO, UNUSED_E,KC_SLSH,
-        KC_NO,        PIANO_KEY,MO(SYSTEM),KC_NO, KC_NO,           MO(APPS),        MO(NAV),             LANG_SWITCH,MO(SYMBOLS_EN),MO(NUMBERS),KC_NO,KC_DLR,
+        KC_ESC,       KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    LCTL(KC_B),      LGUI(KC_SPC), KC_H,   KC_J,    KC_K,    KC_L,    KC_NO,   KC_NO,
+        KC_TILD,      KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                                  KC_N,    KC_M,    KC_COMM, KC_NO, UNUSED_E,KC_SLSH,
+        KC_NO,        PIANO_KEY,MO(SYSTEM),KC_NO, LANG_EN,         MO(APPS),        MO(NAV),             LANG_RU, MO(SYMBOLS_EN),MO(NUMBERS),KC_NO,KC_NO,
                                               KC_LSFT, KC_LGUI, KC_BSPC,          KC_ENT,  KC_RCTL, KC_SPC
     ),
     [RU_BASE] = LAYOUT(
-        _______, _______, _______, EN_DOT,  EN_COMM, EN_COLN, _______,             _______, EN_GRV,  EN_QUOT, EN_QUES, _______, _______, _______,
+        _______, _______, _______, EN_DOT,  _______, EN_COLN, EN_AT,               EN_DLR,  EN_GRV,  EN_QUOT, EN_QUES, _______, _______, _______,
         _______, RU_SHTI, RU_TSE,  RU_U,    RU_KA,   RU_IE,   _______,             _______, RU_EN,   RU_GHE,  RU_SHA,  RU_SHCH, RU_ZE,   _______,
         _______, RU_EF,   RU_YERU, RU_VE,   RU_A,    RU_PE,   _______,             _______, RU_ER,   RU_O,    RU_EL,   RU_DE,   RU_ZHE,  _______,
         EN_TILD, RU_YA,   RU_CHE,  RU_ES,   RU_EM,   RU_I,                                    RU_TE,   RU_SOFT, RU_BE,   RU_YU,   RU_E,    _______,
-        _______, _______, _______, _______, _______,         _______,             _______,          _______, _______, _______, _______, EN_DLR,
+        _______, _______, _______, _______, _______,         _______,             _______,          _______, _______, _______, _______, _______,
                                             _______, _______, _______,             _______, _______, _______
     ),
     [APPS] = LAYOUT(
@@ -53,17 +53,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [SYMBOLS_EN] = LAYOUT(
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   KC_NO,   KC_LCBR, KC_RCBR, KC_NO,   KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_AT,   KC_HASH, KC_LBRC, KC_RBRC, KC_AMPR, KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_CIRC, KC_PIPE, KC_LT,   KC_GT,   KC_NO,                                    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   KC_NO,   KC_AMPR, KC_LCBR, KC_RCBR, KC_NO,   KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   KC_HASH, KC_PIPE, KC_LBRC, KC_RBRC, KC_NO,   KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   KC_NO,   KC_CIRC, KC_LT,   KC_GT,   KC_NO,                                    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
         KC_NO,   _______, _______,KC_NO,   KC_NO,             _______,             _______,          KC_NO,   _______,_______,KC_NO,   KC_NO,
                                             _______, _______, _______,             _______, _______, _______
     ),
     [SYMBOLS_RU] = LAYOUT(
         _______, _______, _______, _______, _______, _______, _______,             _______, _______, _______, _______, _______, _______, _______,
-        _______, _______, _______, EN_LCBR, EN_RCBR, _______, _______,             _______, _______, _______, _______, _______, _______, _______,
-        _______, EN_AT,   EN_HASH, EN_LBRC, EN_RBRC, EN_AMPR, _______,             _______, _______, _______, _______, _______, _______, _______,
-        _______, EN_CIRC, EN_PIPE, EN_LT,   EN_GT,   _______,                                  _______, _______, _______, _______, _______, _______,
+        _______, _______, EN_AMPR, EN_LCBR, EN_RCBR, _______, _______,             _______, _______, _______, _______, _______, _______, _______,
+        _______, EN_HASH, EN_PIPE, EN_LBRC, EN_RBRC, _______, _______,             _______, _______, _______, _______, _______, _______, _______,
+        _______, _______, EN_CIRC, EN_LT,   EN_GT,   _______,                                  _______, _______, _______, _______, _______, _______,
         _______, _______, _______, _______, _______,         _______,             _______,          _______, _______, _______, _______, _______,
                                             _______, _______, _______,             _______, _______, _______
     ),
@@ -94,6 +94,7 @@ static const uint16_t PROGMEM english_symbols[] = {
 STATIC_ASSERT(ARRAY_SIZE(english_symbols) == EN_BSLS - EN_DOT + 1, "English symbol outputs must match their keycodes");
 
 static uint8_t  english_symbols_held;
+static bool     comma_held_with_mods;
 static bool     lock_held;
 static bool     lock_sent;
 static uint16_t lock_timer;
@@ -108,9 +109,6 @@ static float hello_kotify_song[][2] = SONG(
     ED_NOTE(_AS5), H__NOTE(_C6), M__NOTE(_REST, 56),
     ED_NOTE(_AS5), E__NOTE(_REST), H__NOTE(_AS5)
 );
-
-// Piano pitches under A, D, G, D, A, and Z.
-static float piano_start_song[][2] = SONG(Q__NOTE(_G4), Q__NOTE(_A4), Q__NOTE(_B4), Q__NOTE(_A4), Q__NOTE(_G4), E__NOTE(_REST), Q__NOTE(_G3));
 
 static bool is_russian(void) { return (default_layer_state & (1UL << RU_BASE)) != 0; }
 
@@ -164,11 +162,14 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 enum combos {
     CYRILLIC_HA,
     CYRILLIC_HARD_SIGN,
+    DOT_SPACE_SHIFT,
+    PLAIN_COMMA,
     SEMICOLON,
     DOUBLE_QUOTE,
     CYRILLIC_YO,
     EXCLAMATION,
     BACKSLASH,
+    THUMB_ONE_SHOT_SHIFT,
     THUMB_SHIFT_ENTER,
     THUMB_COMMAND_ENTER,
     THUMB_ALT,
@@ -176,12 +177,15 @@ enum combos {
 };
 
 const uint16_t PROGMEM ha_combo[] = {KC_U, KC_I, COMBO_END};
-const uint16_t PROGMEM hard_sign_combo[] = {KC_M, UNUSED_BE, COMBO_END};
-const uint16_t PROGMEM semicolon_combo[] = {KC_DOT, KC_COMM, COMBO_END};
-const uint16_t PROGMEM double_quote_combo[] = {KC_GRV, KC_QUOT, COMBO_END};
+const uint16_t PROGMEM hard_sign_combo[] = {KC_M, KC_COMM, COMBO_END};
+const uint16_t PROGMEM dot_minus_combo[] = {KC_DOT, KC_MINS, COMBO_END};
+const uint16_t PROGMEM plain_comma_combo[] = {COMMA_SPACE, KC_DOT, COMBO_END};
+const uint16_t PROGMEM semicolon_combo[] = {COMMA_SPACE, KC_COLN, COMBO_END};
+const uint16_t PROGMEM double_quote_combo[] = {KC_QUOT, KC_QUES, COMBO_END};
 const uint16_t PROGMEM yo_combo[] = {KC_R, KC_T, COMBO_END};
-const uint16_t PROGMEM exclamation_combo[] = {KC_QUOT, KC_QUES, COMBO_END};
+const uint16_t PROGMEM exclamation_combo[] = {KC_QUES, KC_LPRN, COMBO_END};
 const uint16_t PROGMEM backslash_combo[] = {KC_SLSH, UNUSED_E, COMBO_END};
+const uint16_t PROGMEM thumb_one_shot_shift_combo[] = {KC_LSFT, MO(APPS), COMBO_END};
 const uint16_t PROGMEM thumb_shift_enter_combo[] = {KC_RCTL, KC_ENT, COMBO_END};
 const uint16_t PROGMEM thumb_command_enter_combo[] = {MO(NAV), KC_RCTL, KC_ENT, COMBO_END};
 const uint16_t PROGMEM thumb_alt_combo[] = {MO(NAV), KC_SPC, COMBO_END};
@@ -190,6 +194,8 @@ const uint16_t PROGMEM thumb_command_backspace_combo[] = {MO(APPS), KC_LGUI, KC_
 combo_t key_combos[] = {
     [CYRILLIC_HA] = COMBO(ha_combo, RU_HA),
     [CYRILLIC_HARD_SIGN] = COMBO(hard_sign_combo, RU_HARD),
+    [DOT_SPACE_SHIFT] = COMBO_ACTION(dot_minus_combo),
+    [PLAIN_COMMA] = COMBO(plain_comma_combo, EN_COMM),
     [SEMICOLON] = COMBO(semicolon_combo, EN_SCLN),
     [DOUBLE_QUOTE] = COMBO(double_quote_combo, EN_DQUO),
     // The K03 uses Backslash for this combo, rather than the Russian PC Ё
@@ -197,17 +203,49 @@ combo_t key_combos[] = {
     [CYRILLIC_YO] = COMBO(yo_combo, KC_BSLS),
     [EXCLAMATION] = COMBO(exclamation_combo, KC_EXLM),
     [BACKSLASH] = COMBO(backslash_combo, EN_BSLS),
+    [THUMB_ONE_SHOT_SHIFT] = COMBO_ACTION(thumb_one_shot_shift_combo),
     [THUMB_SHIFT_ENTER] = COMBO(thumb_shift_enter_combo, LSFT(KC_ENT)),
     [THUMB_COMMAND_ENTER] = COMBO(thumb_command_enter_combo, LGUI(KC_ENT)),
     [THUMB_ALT] = COMBO(thumb_alt_combo, KC_RALT),
     [THUMB_COMMAND_BACKSPACE] = COMBO(thumb_command_backspace_combo, LGUI(KC_BSPC)),
 };
 
+static void tap_punctuation_space(uint8_t punctuation) {
+    const saved_mods_t mods = save_and_clear_mods();
+    const bool restore_russian = is_russian() && english_symbols_held == 0;
+    if (restore_russian) {
+        select_input_source(false);
+    }
+    tap_code(punctuation);
+    tap_code(KC_SPC);
+    if (restore_russian) {
+        select_input_source(true);
+    }
+    restore_mods(mods);
+}
+
+void process_combo_event(uint16_t combo_index, bool pressed) {
+    if (!pressed) {
+        return;
+    }
+    switch (combo_index) {
+    case DOT_SPACE_SHIFT:
+        tap_punctuation_space(KC_DOT);
+        break;
+    case THUMB_ONE_SHOT_SHIFT:
+        break;
+    default:
+        return;
+    }
+    add_oneshot_mods(MOD_BIT(KC_LSFT));
+}
+
 bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
     if (layer_state_is(PIANO)) {
         return false;
     }
     switch (combo_index) {
+    case THUMB_ONE_SHOT_SHIFT:
     case THUMB_SHIFT_ENTER:
     case THUMB_COMMAND_ENTER:
     case THUMB_ALT:
@@ -233,11 +271,6 @@ const key_override_t word_delete_override = ko_make_with_layers_negmods_and_opti
     MOD_MASK_GUI, KC_BSPC, LALT(KC_BSPC), ~0, 0, ko_options_default | ko_option_no_reregister_trigger);
 const key_override_t *key_overrides[] = {&word_delete_override};
 
-static void start_piano(void) {
-    layer_on(PIANO);
-    PLAY_SONG(piano_start_song);
-}
-
 static void stop_piano(void) {
     audio_stop_all();
     layer_off(PIANO);
@@ -262,7 +295,7 @@ static void process_piano_key(bool pressed) {
             piano_taps = 0;
         } else if (++piano_taps == 3) {
             piano_taps = 0;
-            start_piano();
+            layer_on(PIANO);
         } else {
             piano_key_timer = timer_read32();
         }
@@ -277,18 +310,8 @@ bool pre_process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (record->event.pressed) {
         piano_taps = 0;
         if (piano_key_held && !layer_state_is(PIANO)) {
-            start_piano();
             // QMK looks up this key again after the layer changes.
-            return true;
-        }
-    }
-    // Handle the red keys before QMK buffers them for combos.
-    if (keycode == MO(APPS) || keycode == MO(NAV)) {
-        const uint8_t layer = QK_MOMENTARY_GET_LAYER(keycode);
-        if (record->event.pressed) {
-            layer_on(layer);
-        } else {
-            layer_off(layer);
+            layer_on(PIANO);
         }
     }
     return true;
@@ -322,6 +345,20 @@ static void hello_kotify(void) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (keycode == COMMA_SPACE) {
+        if (record->event.pressed) {
+            comma_held_with_mods = (get_mods() | get_weak_mods() | get_oneshot_mods()) != 0;
+            if (!comma_held_with_mods) {
+                tap_punctuation_space(KC_COMM);
+            }
+        }
+        if (!comma_held_with_mods) {
+            return false;
+        }
+        comma_held_with_mods = record->event.pressed;
+        keycode = EN_COMM;
+    }
+
     if (keycode >= EN_DOT && keycode <= EN_BSLS) {
         const uint16_t output = pgm_read_word(&english_symbols[keycode - EN_DOT]);
         if (record->event.pressed) {
@@ -351,21 +388,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
     }
-    case MO(APPS):
-    case MO(NAV):
-        // The physical press and release already updated the layer.
-        return false;
-    case LGUI(KC_BSPC):
-    case LGUI(KC_ENT):
-    case KC_RALT:
-        // When a combo uses a red key, drop its layer before sending the shortcut.
-        if (IS_COMBOEVENT(record->event) && record->event.pressed) {
-            layer_off(keycode == LGUI(KC_BSPC) ? APPS : NAV);
-        }
-        return true;
-    case LANG_SWITCH:
+    case LANG_EN:
+    case LANG_RU:
         if (record->event.pressed) {
-            set_language(!is_russian());
+            set_language(keycode == LANG_RU);
         }
         return false;
     case HELLO_KOTIFY:
@@ -380,9 +406,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             lock_sent = false;
         }
         return false;
-    case UNUSED_BE:
     case UNUSED_E:
-        // These otherwise empty English positions still take part in combos.
+        // This empty English position still takes part in the backslash combo.
         return false;
     default:
         return true;
@@ -392,7 +417,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 void matrix_scan_user(void) {
     if (piano_key_held && !layer_state_is(PIANO) && timer_elapsed32(piano_key_timer) >= PIANO_HOLD_MS) {
         piano_taps = 0;
-        start_piano();
+        layer_on(PIANO);
     }
     if (lock_held && !lock_sent && timer_elapsed(lock_timer) >= 1000) {
         const saved_mods_t mods = save_and_clear_mods();
