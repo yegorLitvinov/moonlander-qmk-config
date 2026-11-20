@@ -8,22 +8,20 @@ EN/RU language switching is separate.
 
 ## Layer keys
 
-Bottom-row keys activate a layer on the **opposite half**, except Piano, which
-uses both halves. Thumb-cluster keys activate a layer on the **same half**.
+Symbols, Numbers, and System act on the **opposite half** from their activation
+keys. App-Nav and Piano use both halves.
 
 | Activation key | Layer | Layer actions |
 | --- | --- | --- |
 | Bottom row under K, right | Symbols | Left half |
 | Bottom row under L, right | Numbers | Left half |
 | Bottom row under S, left | System | Right half |
-| Left red thumb key | Apps | Left half |
-| Right red thumb key | Nav | Right half |
+| Bottom row under V or M | App-Nav | Apps on the left, navigation and media on the right |
 | Second key from the left on the bottom row, under Z | Piano | Both halves |
 
 Unassigned keys do nothing. Outside Piano, the layer activation keys and the
-six narrow thumb keys remain available. If several layer keys are held, the
-priority is System, Symbols, Numbers, Nav, then Apps. Piano takes priority
-over all of them.
+thumb keys remain available. If several layer keys are held, the priority is
+System, Symbols, Numbers, then App-Nav. Piano takes priority over all of them.
 
 ## Thumb keys
 
@@ -31,12 +29,8 @@ Positions below run left to right as you look down at the keyboard.
 
 | Side | Three narrow keys | Red key above them |
 | --- | --- | --- |
-| Left | Shift · Command · Backspace | Hold for Apps |
-| Right | Enter · Right Control · Space | Hold for Nav |
-
-Holding a red key on its own activates its layer after the 50 ms combo window.
-A red key used in a combo leaves its layer off. Use the bottom-row key under S
-for System.
+| Left | Shift · Command · Backspace | Combos only |
+| Right | Enter · Right Control · Space | Combos only |
 
 | Thumb keys pressed together | Output |
 | --- | --- |
@@ -61,15 +55,14 @@ starts with an unassigned key, underscore, and minus.
 
 | Position | Action |
 | --- | --- |
-| Under V | Select English |
-| Under M | Select Russian |
+| Outermost right key on the bottom row | Select English |
+| Outermost left key on the bottom row | Select Russian |
 | Left of the backtick | `$` |
 | Right of `:` | `@` |
 | Top-row comma | Comma followed by a space. With a modifier, acts as a regular comma key. |
 | Right of M | Plain comma in English, Б in Russian |
 | Inner key right of G | Ctrl + B |
 | Left of H | Cmd + Space |
-| Top-left key while holding Apps | Updated `hello_kotify` macro |
 | Top-right key | Hold for one second to send Cmd + Ctrl + Q (lock macOS) |
 
 The other spare bottom-row keys are unassigned. Minus and slash keep their base
@@ -91,12 +84,24 @@ Held modifiers are preserved around input-source shortcuts. The `hello_kotify`
 macro searches for `kotify ser`, then sends the original greeting. It restores
 the current keyboard language when finished.
 
-## Apps
+## App-Nav
 
-Hold the **left red key**.
+Hold either **bottom-row key under V or M**. The layer stays active while at
+least one of the two keys is held.
 
-Q/W/E/R/T, A/S/D/F/G, and Z/X/C/V send their letters with Cmd + Ctrl + Alt.
-B sends Cmd + Shift + 5. The top-left key runs the `hello_kotify` macro.
+On the left, Q/W/E/R/T, A/S/D/F/G, and Z/X/C/V send their letters with
+Cmd + Ctrl + Alt. B sends Cmd + Shift + 5. The top-left key runs the
+`hello_kotify` macro.
+
+Navigation and media controls are on the right half.
+
+| Physical keys | Action |
+| --- | --- |
+| Leftmost column, top to bottom | Play/pause · Volume up · Volume down |
+| Y · U · I · O | Right Alt + Left · Page Down · Page Up · Right Alt + Right |
+| H · J · K · L | Left · Down · Up · Right |
+| N · M · next key · next key | Cmd + Left · Cmd + Down · Cmd + Up · Cmd + Right |
+| Top-row keys above U and I | Right Ctrl + Shift + Tab · Right Ctrl + Tab |
 
 ## Numbers
 
@@ -128,18 +133,6 @@ Z  X  C  V  B       ·  ^  <  >  ·
 Dots mark unassigned keys. The Russian variant sends the same symbols by
 temporarily selecting English.
 The right main-body keys do nothing on Symbols.
-
-## Nav
-
-Hold the **right red key**. Navigation and media controls are on the right half.
-
-| Physical keys | Action |
-| --- | --- |
-| Leftmost column, top to bottom | Play/pause · Volume up · Volume down |
-| Y · U · I · O | Right Alt + Left · Page Down · Page Up · Right Alt + Right |
-| H · J · K · L | Left · Down · Up · Right |
-| N · M · next key · next key | Cmd + Left · Cmd + Down · Cmd + Up · Cmd + Right |
-| Top-row keys above U and I | Right Ctrl + Shift + Tab · Right Ctrl + Tab |
 
 ## System
 
@@ -188,8 +181,7 @@ With RGB on, both thumb clusters show the active layer:
 | --- | --- |
 | English | White |
 | Russian | Blue |
-| Apps | Purple |
-| Nav | Cyan |
+| App-Nav | Purple |
 | Numbers | Green |
 | Symbols (EN/RU) | Orange |
 | System | Red |
@@ -227,7 +219,7 @@ The combo window is 50 ms. Positions below use their English base labels.
 | R + T | Ё via the Backslash keycode (`KC_BSLS`) | RU |
 
 Letter and punctuation combos work only on the base layers. Thumb combos work
-on every layer. The red keys still activate their layers when held alone.
+on every layer except Piano.
 
 ## Local build
 

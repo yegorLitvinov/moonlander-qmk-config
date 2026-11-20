@@ -6,8 +6,7 @@
 enum layers {
     EN_BASE,
     RU_BASE,
-    APPS,
-    NAV,
+    APP_NAV,
     NUMBERS,
     SYMBOLS_EN,
     SYMBOLS_RU,
@@ -52,6 +51,9 @@ enum custom_keycodes {
     PIANO_KEY,
     PIANO_NOTE,
     COMMA_SPACE,
+    APP_NAV_KEY,
+    LEFT_RED,
+    RIGHT_RED,
 };
 
 #define APP(key) LGUI(LCTL(LALT(key)))

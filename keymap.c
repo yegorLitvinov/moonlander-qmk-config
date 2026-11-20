@@ -16,7 +16,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,       KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_NO,           KC_NO,       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_NO,
         KC_ESC,       KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    LCTL(KC_B),      LGUI(KC_SPC), KC_H,   KC_J,    KC_K,    KC_L,    KC_NO,   KC_NO,
         KC_TILD,      KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                                  KC_N,    KC_M,    KC_COMM, KC_NO, UNUSED_E,KC_SLSH,
-        KC_NO,        PIANO_KEY,MO(SYSTEM),KC_NO, LANG_EN,         MO(APPS),        MO(NAV),             LANG_RU, MO(SYMBOLS_EN),MO(NUMBERS),KC_NO,KC_NO,
+        LANG_RU,      PIANO_KEY,MO(SYSTEM),KC_NO, APP_NAV_KEY,     LEFT_RED,        RIGHT_RED,           APP_NAV_KEY,MO(SYMBOLS_EN),MO(NUMBERS),KC_NO,LANG_EN,
                                               KC_LSFT, KC_LGUI, KC_BSPC,          KC_ENT,  KC_RCTL, KC_SPC
     ),
     [RU_BASE] = LAYOUT(
@@ -27,20 +27,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______, _______, _______, _______,         _______,             _______,          _______, _______, _______, _______, _______,
                                             _______, _______, _______,             _______, _______, _______
     ),
-    [APPS] = LAYOUT(
-        HELLO_KOTIFY,KC_NO,KC_NO,  KC_NO,   KC_NO,   KC_NO,   KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   APP(KC_Q),APP(KC_W),APP(KC_E),APP(KC_R),APP(KC_T),KC_NO,            KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   APP(KC_A),APP(KC_S),APP(KC_D),APP(KC_F),APP(KC_G),KC_NO,            KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   APP(KC_Z),APP(KC_X),APP(KC_C),APP(KC_V),LGUI(LSFT(KC_5)),                     KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   _______, _______,KC_NO,   KC_NO,             _______,             _______,          KC_NO,   _______,_______,KC_NO,   KC_NO,
-                                            _______, _______, _______,             _______, _______, _______
-    ),
-    [NAV] = LAYOUT(
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,               KC_MPLY, KC_NO,   RCTL(RSFT(KC_TAB)),RCTL(KC_TAB),KC_NO,KC_NO,KC_NO,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,               KC_VOLU, RALT(KC_LEFT),KC_PGDN,KC_PGUP,RALT(KC_RGHT),KC_NO,KC_NO,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,               KC_VOLD, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                                    LGUI(KC_LEFT),LGUI(KC_DOWN),LGUI(KC_UP),LGUI(KC_RGHT),KC_NO,KC_NO,
-        KC_NO,   _______, _______,KC_NO,   KC_NO,             _______,             _______,          KC_NO,   _______,_______,KC_NO,   KC_NO,
+    [APP_NAV] = LAYOUT(
+        HELLO_KOTIFY,KC_NO,KC_NO,  KC_NO,   KC_NO,   KC_NO,   KC_NO,               KC_MPLY, KC_NO,   RCTL(RSFT(KC_TAB)),RCTL(KC_TAB),KC_NO,KC_NO,KC_NO,
+        KC_NO,   APP(KC_Q),APP(KC_W),APP(KC_E),APP(KC_R),APP(KC_T),KC_NO,          KC_VOLU, RALT(KC_LEFT),KC_PGDN,KC_PGUP,RALT(KC_RGHT),KC_NO,KC_NO,
+        KC_NO,   APP(KC_A),APP(KC_S),APP(KC_D),APP(KC_F),APP(KC_G),KC_NO,          KC_VOLD, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_NO,   KC_NO,
+        KC_NO,   APP(KC_Z),APP(KC_X),APP(KC_C),APP(KC_V),LGUI(LSFT(KC_5)),                   LGUI(KC_LEFT),LGUI(KC_DOWN),LGUI(KC_UP),LGUI(KC_RGHT),KC_NO,KC_NO,
+        KC_NO,   _______, _______,KC_NO,   _______,           _______,             _______,          _______, _______,_______,KC_NO,   KC_NO,
                                             _______, _______, _______,             _______, _______, _______
     ),
     [NUMBERS] = LAYOUT(
@@ -48,7 +40,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO,   KC_NO,   KC_7,    KC_8,    KC_9,    EN_ASTR, EN_SLSH,             KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
         KC_NO,   KC_0,    KC_4,    KC_5,    KC_6,    EN_PLUS, EN_MINS,             KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
         KC_NO,   KC_NO,   KC_1,    KC_2,    KC_3,    EN_EQL,                                   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   _______, _______,KC_NO,   KC_NO,             _______,             _______,          KC_NO,   _______,_______,KC_NO,   KC_NO,
+        KC_NO,   _______, _______,KC_NO,   _______,           _______,             _______,          _______, _______,_______,KC_NO,   KC_NO,
                                             _______, _______, _______,             _______, _______, _______
     ),
     [SYMBOLS_EN] = LAYOUT(
@@ -56,7 +48,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO,   KC_NO,   KC_AMPR, KC_LCBR, KC_RCBR, KC_NO,   KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
         KC_NO,   KC_HASH, KC_PIPE, KC_LBRC, KC_RBRC, KC_NO,   KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
         KC_NO,   KC_NO,   KC_CIRC, KC_LT,   KC_GT,   KC_NO,                                    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   _______, _______,KC_NO,   KC_NO,             _______,             _______,          KC_NO,   _______,_______,KC_NO,   KC_NO,
+        KC_NO,   _______, _______,KC_NO,   _______,           _______,             _______,          _______, _______,_______,KC_NO,   KC_NO,
                                             _______, _______, _______,             _______, _______, _______
     ),
     [SYMBOLS_RU] = LAYOUT(
@@ -72,7 +64,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,               KC_NO,   RM_TOGG, RM_VALD, RM_VALU, RM_PREV, RM_NEXT, KC_NO,
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                                    KC_NO,   KC_BRID, KC_BRIU, KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   _______, _______,KC_NO,   KC_NO,             _______,             _______,          KC_NO,   _______,_______,KC_NO,   KC_NO,
+        KC_NO,   _______, _______,KC_NO,   _______,           _______,             _______,          _______, _______,_______,KC_NO,   KC_NO,
                                             _______, _______, _______,             _______, _______, _______
     ),
     [PIANO] = LAYOUT(
@@ -94,6 +86,7 @@ static const uint16_t PROGMEM english_symbols[] = {
 STATIC_ASSERT(ARRAY_SIZE(english_symbols) == EN_BSLS - EN_DOT + 1, "English symbol outputs must match their keycodes");
 
 static uint8_t  english_symbols_held;
+static uint8_t  app_nav_keys_held;
 static bool     comma_held_with_mods;
 static bool     lock_held;
 static bool     lock_sent;
@@ -185,11 +178,11 @@ const uint16_t PROGMEM double_quote_combo[] = {KC_QUOT, KC_QUES, COMBO_END};
 const uint16_t PROGMEM yo_combo[] = {KC_R, KC_T, COMBO_END};
 const uint16_t PROGMEM exclamation_combo[] = {KC_QUES, KC_LPRN, COMBO_END};
 const uint16_t PROGMEM backslash_combo[] = {KC_SLSH, UNUSED_E, COMBO_END};
-const uint16_t PROGMEM thumb_one_shot_shift_combo[] = {KC_LSFT, MO(APPS), COMBO_END};
+const uint16_t PROGMEM thumb_one_shot_shift_combo[] = {KC_LSFT, LEFT_RED, COMBO_END};
 const uint16_t PROGMEM thumb_shift_enter_combo[] = {KC_RCTL, KC_ENT, COMBO_END};
-const uint16_t PROGMEM thumb_command_enter_combo[] = {MO(NAV), KC_RCTL, KC_ENT, COMBO_END};
-const uint16_t PROGMEM thumb_alt_combo[] = {MO(NAV), KC_SPC, COMBO_END};
-const uint16_t PROGMEM thumb_command_backspace_combo[] = {MO(APPS), KC_LGUI, KC_BSPC, COMBO_END};
+const uint16_t PROGMEM thumb_command_enter_combo[] = {RIGHT_RED, KC_RCTL, KC_ENT, COMBO_END};
+const uint16_t PROGMEM thumb_alt_combo[] = {RIGHT_RED, KC_SPC, COMBO_END};
+const uint16_t PROGMEM thumb_command_backspace_combo[] = {LEFT_RED, KC_LGUI, KC_BSPC, COMBO_END};
 
 combo_t key_combos[] = {
     [CYRILLIC_HA] = COMBO(ha_combo, RU_HA),
@@ -392,6 +385,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             set_language(keycode == LANG_RU);
         }
         return false;
+    case APP_NAV_KEY:
+        // Keep the layer active until both layer keys are released.
+        if (record->event.pressed) {
+            if (++app_nav_keys_held == 1) {
+                layer_on(APP_NAV);
+            }
+        } else if (app_nav_keys_held > 0 && --app_nav_keys_held == 0) {
+            layer_off(APP_NAV);
+        }
+        return false;
     case HELLO_KOTIFY:
         if (record->event.pressed) {
             hello_kotify();
@@ -405,7 +408,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
     case UNUSED_E:
-        // This empty English position still takes part in the backslash combo.
+    case LEFT_RED:
+    case RIGHT_RED:
+        // These keys only take part in combos.
         return false;
     default:
         return true;

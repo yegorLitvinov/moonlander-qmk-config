@@ -9,8 +9,7 @@ STATIC_ASSERT(RGB_MATRIX_EFFECT_MAX == 5, "Only four RGB modes should be enabled
 static const rgb_t layer_colors[] = {
     [EN_BASE]    = {255, 255, 255},
     [RU_BASE]    = {0, 0, 255},
-    [APPS]       = {128, 0, 255},
-    [NAV]        = {0, 255, 255},
+    [APP_NAV]    = {128, 0, 255},
     [NUMBERS]    = {0, 255, 0},
     [SYMBOLS_EN] = {255, 128, 0},
     [SYMBOLS_RU] = {255, 128, 0},
@@ -74,7 +73,7 @@ static enum key_role key_role(uint16_t keycode, uint8_t source_layer) {
     if (keycode == KC_NO || keycode == KC_TRNS || keycode == UNUSED_E) {
         return UNUSED;
     }
-    if (IS_QK_MOMENTARY(keycode) || keycode == LANG_EN || keycode == LANG_RU || keycode == PIANO_KEY) {
+    if (IS_QK_MOMENTARY(keycode) || keycode == APP_NAV_KEY || keycode == LANG_EN || keycode == LANG_RU || keycode == PIANO_KEY) {
         return LAYER;
     }
     if ((keycode >= EN_DOT && keycode <= EN_BSLS) || keycode == COMMA_SPACE) {
