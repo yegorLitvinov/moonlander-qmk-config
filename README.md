@@ -49,7 +49,7 @@ excepted) and after 3 seconds.
 | Right Alt + Right Control | Hold Right Alt + Right Control |
 
 The Enter and word-delete combos use nearby keys on the same thumb cluster.
-Press each pair within 50 ms to send a single tap outside Piano.
+Press each pair within 40 ms to send a single tap outside Piano.
 
 ## Base layers
 
@@ -148,6 +148,7 @@ half.
 | Y | RGB on/off |
 | U / I | RGB brightness down/up |
 | O / P | Previous/next RGB effect |
+| Key left of the top-right key | Flash with Keymapp: open it (Cmd + Ctrl + Alt + Q), select `moonlander-reva.bin`, then enter bootloader mode |
 | Top-right key | Enter bootloader mode for flashing |
 
 Other main-body keys do nothing on System.
@@ -192,7 +193,9 @@ With RGB on, both thumb clusters show the active layer:
 
 The highest-priority active layer determines the indicator color. Temporary
 English input for Russian symbols does not change the selected layer's color.
-The separate status LEDs are disabled.
+The six status LEDs, left to right, are blue, green, red, blue, green, red; they
+can only be on or off. Both blue LEDs are on while Russian is selected. The other status LEDs
+only show the startup animation.
 
 **System + Y** toggles all RGB, including the thumb indicators.
 **System + U / I** adjusts brightness. Mode, RGB state, and brightness are saved
@@ -207,7 +210,7 @@ fingers, and cyan for index fingers.
 
 ## Combos
 
-The combo window is 50 ms. Positions below use their English base labels.
+The combo window is 40 ms. Positions below use their English base labels.
 
 | Keys pressed together | Output | Language |
 | --- | --- | --- |

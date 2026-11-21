@@ -1,9 +1,17 @@
 #pragma once
 
-#define COMBO_TERM 50
+// Combo keys (including Shift and Right Ctrl) are held back up to this long
+// before they are sent. Downsides:
+// - Fast rolls of two combo keys can trigger the combo.
+// - A mouse click within this time after Shift or Right Ctrl reaches the computer
+//   before the modifier, so Shift+click or Ctrl+click becomes a plain click.
+#define COMBO_TERM 40
 #define COMBO_ONLY_FROM_LAYER 0
 #define COMBO_SHOULD_TRIGGER
 #define ONESHOT_TIMEOUT 3000
+
+// The keymap drives the status LEDs instead of ZSA's layer display.
+#define MOONLANDER_USER_LEDS
 
 #define NO_MUSIC_MODE
 // Piano pitches under A, D, G, D, A, and Z.

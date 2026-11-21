@@ -18,6 +18,7 @@ enum custom_keycodes {
     LANG_EN = SAFE_RANGE,
     LANG_RU,
     HELLO_KOTIFY,
+    FLASH_KEYMAPP,
     HOLD_LOCK,
     UNUSED_E,
     EN_DOT,

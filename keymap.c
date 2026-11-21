@@ -60,7 +60,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                             _______, _______, _______,             _______, _______, _______
     ),
     [SYSTEM] = LAYOUT(
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   QK_BOOT,
+        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   FLASH_KEYMAPP, QK_BOOT,
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,               KC_NO,   RM_TOGG, RM_VALD, RM_VALU, RM_PREV, RM_NEXT, KC_NO,
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                                    KC_NO,   KC_BRID, KC_BRIU, KC_NO,   KC_NO,   KC_NO,
@@ -178,6 +178,9 @@ static void select_input_source(bool russian) {
 static void set_language(bool russian) {
     // Keep English underneath Russian so transparent keys retain their bindings.
     default_layer_set((1UL << EN_BASE) | (russian ? (1UL << RU_BASE) : 0));
+    // The blue status LED on each half shows Russian.
+    STATUS_LED_1(russian);
+    STATUS_LED_4(russian);
     layer_state_set(layer_state);
     select_input_source(russian && english_symbols_held == 0);
 }
@@ -345,7 +348,8 @@ static void hello_kotify(void) {
     const saved_mods_t mods = save_and_clear_mods();
     select_input_source(false);
     tap_code16(APP(KC_G));
-    wait_ms(50);
+    // The keyboard cannot see which window is focused, so give the app time to come forward.
+    wait_ms(300);
     tap_code(KC_ESC);
     tap_code(KC_ESC);
     tap_code16(LGUI(KC_F));
@@ -365,6 +369,29 @@ static void hello_kotify(void) {
     wait_ms(50);
     select_input_source(is_russian() && english_symbols_held == 0);
     restore_mods(mods);
+}
+
+// Opens Keymapp, picks dist/moonlander-reva.bin in its file dialog, and enters the bootloader.
+static void flash_keymapp(void) {
+    save_and_clear_mods();
+    tap_code16(APP(KC_Q));
+    wait_ms(1000);
+    // Open the flash dialog.
+    tap_code(KC_TAB);
+    tap_code(KC_SPC);
+    wait_ms(500);
+    // Open the firmware file dialog.
+    for (uint8_t i = 0; i < 5; ++i) {
+        tap_code(KC_TAB);
+    }
+    tap_code(KC_SPC);
+    wait_ms(1000);
+    // The firmware is the second file in the dialog.
+    tap_code(KC_DOWN);
+    tap_code(KC_DOWN);
+    tap_code(KC_ENT);
+    wait_ms(500);
+    reset_keyboard();
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -445,6 +472,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case HELLO_KOTIFY:
         if (record->event.pressed) {
             hello_kotify();
+        }
+        return false;
+    case FLASH_KEYMAPP:
+        if (record->event.pressed) {
+            flash_keymapp();
         }
         return false;
     case HOLD_LOCK:

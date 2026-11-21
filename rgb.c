@@ -81,7 +81,7 @@ static enum key_role key_role(uint16_t keycode, uint8_t source_layer) {
     if (keycode == HELLO_KOTIFY) {
         return SHORTCUT;
     }
-    if (keycode == HOLD_LOCK || keycode == QK_BOOTLOADER || IS_RGB_MATRIX_KEYCODE(keycode)) {
+    if (keycode == HOLD_LOCK || keycode == FLASH_KEYMAPP || keycode == QK_BOOTLOADER || IS_RGB_MATRIX_KEYCODE(keycode)) {
         return CONTROL;
     }
 
@@ -160,15 +160,6 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 }
 
 void keyboard_post_init_user(void) {
-    // The RGB thumb keys replace Moonlander's separate layer status LEDs.
-    keyboard_config.led_level = false;
-    STATUS_LED_1(false);
-    STATUS_LED_2(false);
-    STATUS_LED_3(false);
-    STATUS_LED_4(false);
-    STATUS_LED_5(false);
-    STATUS_LED_6(false);
-
     // An old animation index may no longer exist after removing other effects.
     if (rgb_matrix_get_mode() == RGB_MATRIX_NONE || rgb_matrix_get_mode() >= RGB_MATRIX_EFFECT_MAX) {
         rgb_matrix_mode(RGB_MATRIX_DEFAULT_MODE);
