@@ -52,8 +52,6 @@ enum custom_keycodes {
     PIANO_NOTE,
     COMMA_SPACE,
     APP_NAV_KEY,
-    LEFT_RED,
-    RIGHT_RED,
 };
 
 #define APP(key) LGUI(LCTL(LALT(key)))

@@ -16,8 +16,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,       KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_NO,           KC_NO,       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_NO,
         KC_ESC,       KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    LCTL(KC_B),      LGUI(KC_SPC), KC_H,   KC_J,    KC_K,    KC_L,    KC_NO,   KC_NO,
         KC_TILD,      KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                                  KC_N,    KC_M,    KC_COMM, KC_NO, UNUSED_E,KC_SLSH,
-        LANG_RU,      PIANO_KEY,MO(SYSTEM),KC_NO, APP_NAV_KEY,     LEFT_RED,        RIGHT_RED,           APP_NAV_KEY,MO(SYMBOLS_EN),MO(NUMBERS),KC_NO,LANG_EN,
-                                              KC_LSFT, KC_LGUI, KC_BSPC,          KC_ENT,  KC_RCTL, KC_SPC
+        LANG_RU,      PIANO_KEY,MO(SYSTEM),KC_NO, APP_NAV_KEY,     KC_BSPC,         KC_ENT,              APP_NAV_KEY,MO(SYMBOLS_EN),MO(NUMBERS),KC_NO,LANG_EN,
+                                              KC_LSFT, KC_LGUI, KC_NO,            KC_RALT, KC_RCTL, KC_SPC
     ),
     [RU_BASE] = LAYOUT(
         _______, _______, _______, EN_DOT,  _______, EN_COLN, EN_AT,               EN_DLR,  EN_GRV,  EN_QUOT, EN_QUES, _______, _______, _______,
@@ -162,11 +162,9 @@ enum combos {
     CYRILLIC_YO,
     EXCLAMATION,
     BACKSLASH,
-    THUMB_ONE_SHOT_SHIFT,
     THUMB_SHIFT_ENTER,
     THUMB_COMMAND_ENTER,
-    THUMB_ALT,
-    THUMB_COMMAND_BACKSPACE,
+    THUMB_WORD_DELETE,
 };
 
 const uint16_t PROGMEM ha_combo[] = {KC_U, KC_I, COMBO_END};
@@ -178,11 +176,9 @@ const uint16_t PROGMEM double_quote_combo[] = {KC_QUOT, KC_QUES, COMBO_END};
 const uint16_t PROGMEM yo_combo[] = {KC_R, KC_T, COMBO_END};
 const uint16_t PROGMEM exclamation_combo[] = {KC_QUES, KC_LPRN, COMBO_END};
 const uint16_t PROGMEM backslash_combo[] = {KC_SLSH, UNUSED_E, COMBO_END};
-const uint16_t PROGMEM thumb_one_shot_shift_combo[] = {KC_LSFT, LEFT_RED, COMBO_END};
-const uint16_t PROGMEM thumb_shift_enter_combo[] = {KC_RCTL, KC_ENT, COMBO_END};
-const uint16_t PROGMEM thumb_command_enter_combo[] = {RIGHT_RED, KC_RCTL, KC_ENT, COMBO_END};
-const uint16_t PROGMEM thumb_alt_combo[] = {RIGHT_RED, KC_SPC, COMBO_END};
-const uint16_t PROGMEM thumb_command_backspace_combo[] = {LEFT_RED, KC_LGUI, KC_BSPC, COMBO_END};
+const uint16_t PROGMEM thumb_shift_enter_combo[] = {KC_SPC, KC_ENT, COMBO_END};
+const uint16_t PROGMEM thumb_command_enter_combo[] = {KC_RCTL, KC_ENT, COMBO_END};
+const uint16_t PROGMEM thumb_word_delete_combo[] = {KC_LSFT, KC_BSPC, COMBO_END};
 
 combo_t key_combos[] = {
     [CYRILLIC_HA] = COMBO(ha_combo, RU_HA),
@@ -194,11 +190,9 @@ combo_t key_combos[] = {
     [CYRILLIC_YO] = COMBO(yo_combo, KC_BSLS),
     [EXCLAMATION] = COMBO(exclamation_combo, KC_EXLM),
     [BACKSLASH] = COMBO(backslash_combo, EN_BSLS),
-    [THUMB_ONE_SHOT_SHIFT] = COMBO_ACTION(thumb_one_shot_shift_combo),
-    [THUMB_SHIFT_ENTER] = COMBO(thumb_shift_enter_combo, LSFT(KC_ENT)),
-    [THUMB_COMMAND_ENTER] = COMBO(thumb_command_enter_combo, LGUI(KC_ENT)),
-    [THUMB_ALT] = COMBO(thumb_alt_combo, KC_RALT),
-    [THUMB_COMMAND_BACKSPACE] = COMBO(thumb_command_backspace_combo, LGUI(KC_BSPC)),
+    [THUMB_SHIFT_ENTER] = COMBO_ACTION(thumb_shift_enter_combo),
+    [THUMB_COMMAND_ENTER] = COMBO_ACTION(thumb_command_enter_combo),
+    [THUMB_WORD_DELETE] = COMBO_ACTION(thumb_word_delete_combo),
 };
 
 static void tap_punctuation_space(uint8_t punctuation) {
@@ -222,13 +216,18 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
     switch (combo_index) {
     case DOT_SPACE_SHIFT:
         tap_punctuation_space(KC_DOT);
+        add_oneshot_mods(MOD_BIT(KC_LSFT));
         break;
-    case THUMB_ONE_SHOT_SHIFT:
+    case THUMB_SHIFT_ENTER:
+        tap_code16(LSFT(KC_ENT));
         break;
-    default:
-        return;
+    case THUMB_COMMAND_ENTER:
+        tap_code16(LGUI(KC_ENT));
+        break;
+    case THUMB_WORD_DELETE:
+        tap_code16(LALT(KC_BSPC));
+        break;
     }
-    add_oneshot_mods(MOD_BIT(KC_LSFT));
 }
 
 bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
@@ -236,11 +235,9 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode
         return false;
     }
     switch (combo_index) {
-    case THUMB_ONE_SHOT_SHIFT:
     case THUMB_SHIFT_ENTER:
     case THUMB_COMMAND_ENTER:
-    case THUMB_ALT:
-    case THUMB_COMMAND_BACKSPACE:
+    case THUMB_WORD_DELETE:
         return true;
     }
     const uint8_t layer = get_highest_layer(layer_state | default_layer_state);
@@ -256,11 +253,6 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode
         return true;
     }
 }
-
-// A key override also works when Command was held before Backspace was pressed.
-const key_override_t word_delete_override = ko_make_with_layers_negmods_and_options(
-    MOD_MASK_GUI, KC_BSPC, LALT(KC_BSPC), ~0, 0, ko_options_default | ko_option_no_reregister_trigger);
-const key_override_t *key_overrides[] = {&word_delete_override};
 
 static void stop_piano(void) {
     audio_stop_all();
@@ -408,9 +400,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
     case UNUSED_E:
-    case LEFT_RED:
-    case RIGHT_RED:
-        // These keys only take part in combos.
+        // This key only takes part in a combo.
         return false;
     default:
         return true;

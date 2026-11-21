@@ -12,9 +12,6 @@
     Q__NOTE(_G4), E__NOTE(_REST), Q__NOTE(_G3))
 #define GOODBYE_SONG SONG(S__NOTE(_E5), E__NOTE(_C5))
 
-// Command + Backspace should work as soon as either key completes the shortcut.
-#define KEY_OVERRIDE_REPEAT_DELAY 0
-
 #define RGB_MATRIX_DEFAULT_MODE RGB_MATRIX_SOLID_COLOR
 #define RGB_MATRIX_DEFAULT_SPD 224
 #define RGB_MATRIX_TYPING_HEATMAP_SLIM

@@ -29,29 +29,24 @@ Positions below run left to right as you look down at the keyboard.
 
 | Side | Three narrow keys | Red key above them |
 | --- | --- | --- |
-| Left | Shift · Command · Backspace | Combos only |
-| Right | Enter · Right Control · Space | Combos only |
+| Left | Shift · Command · Unassigned | Backspace |
+| Right | Right Alt · Right Control · Space | Enter |
 
 | Thumb keys pressed together | Output |
 | --- | --- |
-| Left Shift + left red | Shift for the next key |
-| Right Control + Enter | Shift + Enter |
-| Right red + Right Control + Enter | Command + Enter |
-| Right red + Space | Hold Right Alt |
-| Right red + Right Control + Space | Hold Right Alt + Right Control |
-| Left red + Command + Backspace | Command + Backspace |
+| Left Shift + Backspace | Alt + Backspace (delete a word) |
+| Space + Enter | Shift + Enter |
+| Right Control + Enter | Command + Enter |
+| Command + Backspace | Command + Backspace |
+| Right Alt + Right Control | Hold Right Alt + Right Control |
 
-Press the thumb keys together using the 50 ms combo window outside Piano.
-Right red + Ctrl + Enter takes priority over Ctrl + Enter.
-
-Command + Backspace sends **Alt + Backspace** to delete a word. Press left red,
-Command, and Backspace together for Finder file deletion or whole-line deletion.
+The Enter and word-delete combos use nearby keys on the same thumb cluster.
+Press each pair within 50 ms to send a single tap outside Piano.
 
 ## Base layers
 
-Enter is on the right thumb and Backspace is on the left thumb. The far-right
-key on the home row and the key right of P are unassigned. The punctuation row
-starts with an unassigned key, underscore, and minus.
+The keys right of P and above `/` are unassigned. The punctuation row starts
+with an unassigned key, underscore, and minus.
 
 | Position | Action |
 | --- | --- |
