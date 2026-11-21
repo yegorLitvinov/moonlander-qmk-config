@@ -17,7 +17,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_ESC,       KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    LCTL(KC_B),      LGUI(KC_SPC), KC_H,   KC_J,    KC_K,    KC_L,    KC_NO,   KC_NO,
         KC_TILD,      KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                                  KC_N,    KC_M,    KC_COMM, KC_NO, UNUSED_E,KC_SLSH,
         LANG_RU,      PIANO_KEY,MO(SYSTEM),KC_NO, APP_NAV_KEY,     KC_BSPC,         KC_ENT,              APP_NAV_KEY,MO(SYMBOLS_EN),MO(NUMBERS),KC_NO,LANG_EN,
-                                              KC_LSFT, KC_LGUI, KC_NO,            KC_RALT, KC_RCTL, KC_SPC
+                                        OSM(MOD_LSFT), KC_LGUI, KC_NO,            KC_RALT, KC_RCTL, KC_SPC
     ),
     [RU_BASE] = LAYOUT(
         _______, _______, _______, EN_DOT,  _______, EN_COLN, EN_AT,               EN_DLR,  EN_GRV,  EN_QUOT, EN_QUES, _______, _______, _______,
@@ -105,6 +105,44 @@ static float hello_kotify_song[][2] = SONG(
 
 static bool is_russian(void) { return (default_layer_state & (1UL << RU_BASE)) != 0; }
 
+bool is_letter(uint16_t keycode, bool russian) {
+    if (keycode >= KC_A && keycode <= KC_Z) {
+        return true;
+    }
+    // These HID punctuation keys type letters in the Russian input source.
+    if (russian) {
+        switch (keycode) {
+        case RU_HA:
+        case RU_HARD:
+        case RU_ZHE:
+        case RU_E:
+        case RU_BE:
+        case RU_YU:
+        case KC_BSLS: // Ё, sent by the R + T combo.
+            return true;
+        }
+    }
+    return false;
+}
+
+// Russian letters share some HID punctuation keys, so check letters first.
+static bool is_symbol(uint16_t keycode, bool russian) {
+    return (is_number_key(keycode) || is_punctuation_key(keycode)) && !is_letter(keycode, russian);
+}
+
+// Digits and symbols have their own keys, so a lone held Shift must not change them.
+static void register_symbol(uint16_t keycode) {
+    const uint8_t mods = get_mods();
+    if (mods == 0 || (mods & ~MOD_MASK_SHIFT) != 0) {
+        register_code16(keycode);
+        return;
+    }
+    del_mods(MOD_MASK_SHIFT);
+    register_code16(keycode);
+    // Restore Shift for the next keys without sending another report.
+    set_mods(mods);
+}
+
 typedef struct {
     uint8_t regular;
     uint8_t weak;
@@ -178,7 +216,7 @@ const uint16_t PROGMEM exclamation_combo[] = {KC_QUES, KC_LPRN, COMBO_END};
 const uint16_t PROGMEM backslash_combo[] = {KC_SLSH, UNUSED_E, COMBO_END};
 const uint16_t PROGMEM thumb_shift_enter_combo[] = {KC_SPC, KC_ENT, COMBO_END};
 const uint16_t PROGMEM thumb_command_enter_combo[] = {KC_RCTL, KC_ENT, COMBO_END};
-const uint16_t PROGMEM thumb_word_delete_combo[] = {KC_LSFT, KC_BSPC, COMBO_END};
+const uint16_t PROGMEM thumb_word_delete_combo[] = {OSM(MOD_LSFT), KC_BSPC, COMBO_END};
 
 combo_t key_combos[] = {
     [CYRILLIC_HA] = COMBO(ha_combo, RU_HA),
@@ -328,9 +366,15 @@ static void hello_kotify(void) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    // A one-shot Shift only capitalizes the next letter; it survives a language switch.
+    if (record->event.pressed && (get_oneshot_mods() & MOD_MASK_SHIFT) && keycode != LANG_EN && keycode != LANG_RU &&
+        !is_letter(keycode, is_russian())) {
+        del_oneshot_mods(MOD_MASK_SHIFT);
+    }
+
     if (keycode == COMMA_SPACE) {
         if (record->event.pressed) {
-            comma_held_with_mods = (get_mods() | get_weak_mods() | get_oneshot_mods()) != 0;
+            comma_held_with_mods = ((get_mods() | get_weak_mods() | get_oneshot_mods()) & ~MOD_MASK_SHIFT) != 0;
             if (!comma_held_with_mods) {
                 tap_punctuation_space(KC_COMM);
             }
@@ -348,12 +392,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (english_symbols_held++ == 0 && is_russian()) {
                 select_input_source(false);
             }
-            register_code16(output);
+            register_symbol(output);
         } else {
             unregister_code16(output);
             if (english_symbols_held > 0 && --english_symbols_held == 0 && is_russian()) {
                 select_input_source(true);
             }
+        }
+        return false;
+    }
+
+    if (is_symbol(keycode, is_russian())) {
+        if (record->event.pressed) {
+            register_symbol(keycode);
+        } else {
+            unregister_code16(keycode);
         }
         return false;
     }

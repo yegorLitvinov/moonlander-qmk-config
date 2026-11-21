@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 #include "rgb.h"
 #include "keymap.h"
-#include "keymap_russian.h"
 
 STATIC_ASSERT(RGB_MATRIX_EFFECT_MAX == 5, "Only four RGB modes should be enabled");
 
@@ -93,34 +92,21 @@ static enum key_role key_role(uint16_t keycode, uint8_t source_layer) {
     if (IS_QK_MODS(keycode)) {
         const uint8_t mods = QK_MODS_GET_MODS(keycode);
         if ((mods == MOD_LSFT || mods == (0x10 | MOD_LSFT)) &&
-            ((basic >= KC_1 && basic <= KC_0) || (basic >= KC_MINUS && basic <= KC_SLASH))) {
+            (is_number_key(basic) || is_punctuation_key(basic))) {
             return SYMBOL;
         }
         return SHORTCUT;
     }
-    if (IS_MODIFIER_KEYCODE(keycode)) {
+    if (IS_MODIFIER_KEYCODE(keycode) || IS_QK_ONE_SHOT_MOD(keycode)) {
         return MODIFIER;
     }
-    // These HID punctuation keys are letters when supplied by the Russian layer.
-    if (source_layer == RU_BASE) {
-        switch (keycode) {
-        case RU_YO:
-        case RU_HA:
-        case RU_HARD:
-        case RU_ZHE:
-        case RU_E:
-        case RU_BE:
-        case RU_YU:
-            return LETTER;
-        }
-    }
-    if (keycode >= KC_A && keycode <= KC_Z) {
+    if (is_letter(keycode, source_layer == RU_BASE)) {
         return LETTER;
     }
-    if (keycode >= KC_1 && keycode <= KC_0) {
+    if (is_number_key(keycode)) {
         return NUMBER;
     }
-    if (keycode >= KC_MINUS && keycode <= KC_SLASH) {
+    if (is_punctuation_key(keycode)) {
         return SYMBOL;
     }
     if (IS_CONSUMER_KEYCODE(keycode) || keycode == PIANO_NOTE) {

@@ -6,6 +6,10 @@ Adapted from `ergohaven-zmk-config` at revision `f750cfc`.
 Hold a layer key to use its layer. Piano can also stay on after a triple tap.
 EN/RU language switching is separate.
 
+Every digit and symbol has its own key, so Shift only changes letters. When
+Shift is the only modifier held, digits and symbols are typed without it.
+Shortcuts that add Command, Control, or Alt keep Shift.
+
 ## Layer keys
 
 Symbols, Numbers, and System act on the **opposite half** from their activation
@@ -29,8 +33,12 @@ Positions below run left to right as you look down at the keyboard.
 
 | Side | Three narrow keys | Red key above them |
 | --- | --- | --- |
-| Left | Shift · Command · Unassigned | Backspace |
+| Left | One-shot Shift · Command · Unassigned | Backspace |
 | Right | Right Alt · Right Control · Space | Enter |
+
+Tap Shift to capitalize the next letter, or hold it as a regular Shift. A
+one-shot Shift is canceled by any key that is not a letter (language keys
+excepted) and after 3 seconds.
 
 | Thumb keys pressed together | Output |
 | --- | --- |
@@ -203,7 +211,7 @@ The combo window is 50 ms. Positions below use their English base labels.
 
 | Keys pressed together | Output | Language |
 | --- | --- | --- |
-| Top-row `.` + `-` | Period, space, then Shift for the next key | EN/RU |
+| Top-row `.` + `-` | Period, space, then one-shot Shift | EN/RU |
 | Top-row `,` + `.` | `,` | EN/RU |
 | Top-row `,` + `:` | `;` | EN/RU |
 | Top-row quote + `?` | `"` | EN/RU |

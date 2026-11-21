@@ -4,6 +4,7 @@
 #define COMBO_ONLY_FROM_LAYER 0
 #define COMBO_SHOULD_TRIGGER
 #define TAP_CODE_DELAY 30
+#define ONESHOT_TIMEOUT 3000
 
 #define NO_MUSIC_MODE
 // Piano pitches under A, D, G, D, A, and Z.

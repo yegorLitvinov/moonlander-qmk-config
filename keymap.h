@@ -55,3 +55,8 @@ enum custom_keycodes {
 };
 
 #define APP(key) LGUI(LCTL(LALT(key)))
+
+static inline bool is_number_key(uint16_t keycode) { return keycode >= KC_1 && keycode <= KC_0; }
+static inline bool is_punctuation_key(uint16_t keycode) { return keycode >= KC_MINUS && keycode <= KC_SLASH; }
+
+bool is_letter(uint16_t keycode, bool russian);
