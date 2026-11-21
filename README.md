@@ -33,8 +33,8 @@ Positions below run left to right as you look down at the keyboard.
 
 | Side | Three narrow keys | Red key above them |
 | --- | --- | --- |
-| Left | One-shot Shift · Command · Unassigned | Backspace |
-| Right | Right Alt · Right Control · Space | Enter |
+| Left | One-shot Shift · Command · Alt | Backspace |
+| Right | Unassigned · Right Control · Space | Enter |
 
 Tap Shift to capitalize the next letter, or hold it as a regular Shift. A
 one-shot Shift is canceled by any key that is not a letter (language keys
@@ -45,8 +45,6 @@ excepted) and after 3 seconds.
 | Left Shift + Backspace | Alt + Backspace (delete a word) |
 | Space + Enter | Shift + Enter |
 | Right Control + Enter | Command + Enter |
-| Command + Backspace | Command + Backspace |
-| Right Alt + Right Control | Hold Right Alt + Right Control |
 
 The Enter and word-delete combos use nearby keys on the same thumb cluster.
 Press each pair within 40 ms to send a single tap outside Piano.

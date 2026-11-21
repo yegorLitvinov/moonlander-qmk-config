@@ -17,7 +17,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_ESC,       KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    LCTL(KC_B),      LGUI(KC_SPC), KC_H,   KC_J,    KC_K,    KC_L,    KC_NO,   KC_NO,
         KC_TILD,      KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                                  KC_N,    KC_M,    KC_COMM, KC_NO, UNUSED_E,KC_SLSH,
         LANG_RU,      PIANO_KEY,MO(SYSTEM),KC_NO, APP_NAV_KEY,     KC_BSPC,         KC_ENT,              APP_NAV_KEY,MO(SYMBOLS),MO(NUMBERS),KC_NO,LANG_EN,
-                                        OSM(MOD_LSFT), KC_LGUI, KC_NO,            KC_RALT, KC_RCTL, KC_SPC
+                                        OSM(MOD_LSFT), KC_LGUI, KC_LALT,          KC_NO,   KC_RCTL, KC_SPC
     ),
     [RU_BASE] = LAYOUT(
         _______, _______, _______, EN_DOT,  _______, EN_COLN, EN_AT,               EN_DLR,  EN_GRV,  EN_QUOT, EN_QUES, _______, _______, _______,
