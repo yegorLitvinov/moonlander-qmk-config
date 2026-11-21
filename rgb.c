@@ -10,12 +10,13 @@ static const rgb_t layer_colors[] = {
     [RU_BASE]    = {0, 0, 255},
     [APP_NAV]    = {128, 0, 255},
     [NUMBERS]    = {0, 255, 0},
-    [SYMBOLS_EN] = {255, 128, 0},
-    [SYMBOLS_RU] = {255, 128, 0},
+    [SYMBOLS]    = {255, 128, 0},
     [SYSTEM]     = {255, 0, 0},
     [PIANO]      = {255, 224, 0},
 };
 // clang-format on
+
+STATIC_ASSERT(ARRAY_SIZE(layer_colors) == LAYER_COUNT, "Every layer needs a color");
 
 enum finger { PINKY, RING, MIDDLE, INDEX };
 
@@ -75,7 +76,7 @@ static enum key_role key_role(uint16_t keycode, uint8_t source_layer) {
     if (IS_QK_MOMENTARY(keycode) || keycode == APP_NAV_KEY || keycode == LANG_EN || keycode == LANG_RU || keycode == PIANO_KEY) {
         return LAYER;
     }
-    if ((keycode >= EN_DOT && keycode <= EN_BSLS) || keycode == COMMA_SPACE) {
+    if (is_english_symbol(keycode) || keycode == COMMA_SPACE) {
         return SYMBOL;
     }
     if (keycode == HELLO_KOTIFY) {

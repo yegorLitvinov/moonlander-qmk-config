@@ -133,8 +133,7 @@ A  S  D  F  G       #  |  [  ]  ·
 Z  X  C  V  B       ·  ^  <  >  ·
 ```
 
-Dots mark unassigned keys. The Russian variant sends the same symbols by
-temporarily selecting English.
+Dots mark unassigned keys. In Russian, each symbol temporarily selects English.
 The right main-body keys do nothing on Symbols.
 
 ## System
@@ -187,7 +186,7 @@ With RGB on, both thumb clusters show the active layer:
 | Russian | Blue |
 | App-Nav | Purple |
 | Numbers | Green |
-| Symbols (EN/RU) | Orange |
+| Symbols | Orange |
 | System | Red |
 | Piano | Yellow |
 

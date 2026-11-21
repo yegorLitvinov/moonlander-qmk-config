@@ -16,7 +16,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,       KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_NO,           KC_NO,       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_NO,
         KC_ESC,       KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    LCTL(KC_B),      LGUI(KC_SPC), KC_H,   KC_J,    KC_K,    KC_L,    KC_NO,   KC_NO,
         KC_TILD,      KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                                  KC_N,    KC_M,    KC_COMM, KC_NO, UNUSED_E,KC_SLSH,
-        LANG_RU,      PIANO_KEY,MO(SYSTEM),KC_NO, APP_NAV_KEY,     KC_BSPC,         KC_ENT,              APP_NAV_KEY,MO(SYMBOLS_EN),MO(NUMBERS),KC_NO,LANG_EN,
+        LANG_RU,      PIANO_KEY,MO(SYSTEM),KC_NO, APP_NAV_KEY,     KC_BSPC,         KC_ENT,              APP_NAV_KEY,MO(SYMBOLS),MO(NUMBERS),KC_NO,LANG_EN,
                                         OSM(MOD_LSFT), KC_LGUI, KC_NO,            KC_RALT, KC_RCTL, KC_SPC
     ),
     [RU_BASE] = LAYOUT(
@@ -38,25 +38,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [NUMBERS] = LAYOUT(
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   EN_PERC, KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
         KC_NO,   KC_NO,   KC_7,    KC_8,    KC_9,    EN_ASTR, EN_SLSH,             KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_0,    KC_4,    KC_5,    KC_6,    EN_PLUS, EN_MINS,             KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   KC_1,    KC_2,    KC_3,    EN_EQL,                                   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   KC_0,    KC_4,    KC_5,    KC_6,    KC_PLUS, KC_MINS,             KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   KC_NO,   KC_1,    KC_2,    KC_3,    KC_EQL,                                   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
         KC_NO,   _______, _______,KC_NO,   _______,           _______,             _______,          _______, _______,_______,KC_NO,   KC_NO,
                                             _______, _______, _______,             _______, _______, _______
     ),
-    [SYMBOLS_EN] = LAYOUT(
+    [SYMBOLS] = LAYOUT(
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   KC_AMPR, KC_LCBR, KC_RCBR, KC_NO,   KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_HASH, KC_PIPE, KC_LBRC, KC_RBRC, KC_NO,   KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   KC_CIRC, KC_LT,   KC_GT,   KC_NO,                                    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   KC_NO,   EN_AMPR, EN_LCBR, EN_RCBR, KC_NO,   KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   EN_HASH, EN_PIPE, EN_LBRC, EN_RBRC, KC_NO,   KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   KC_NO,   EN_CIRC, EN_LT,   EN_GT,   KC_NO,                                    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
         KC_NO,   _______, _______,KC_NO,   _______,           _______,             _______,          _______, _______,_______,KC_NO,   KC_NO,
-                                            _______, _______, _______,             _______, _______, _______
-    ),
-    [SYMBOLS_RU] = LAYOUT(
-        _______, _______, _______, _______, _______, _______, _______,             _______, _______, _______, _______, _______, _______, _______,
-        _______, _______, EN_AMPR, EN_LCBR, EN_RCBR, _______, _______,             _______, _______, _______, _______, _______, _______, _______,
-        _______, EN_HASH, EN_PIPE, EN_LBRC, EN_RBRC, _______, _______,             _______, _______, _______, _______, _______, _______, _______,
-        _______, _______, EN_CIRC, EN_LT,   EN_GT,   _______,                                  _______, _______, _______, _______, _______, _______,
-        _______, _______, _______, _______, _______,         _______,             _______,          _______, _______, _______, _______, _______,
                                             _______, _______, _______,             _______, _______, _______
     ),
     [SYSTEM] = LAYOUT(
@@ -79,11 +71,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // clang-format on
 
 static const uint16_t PROGMEM english_symbols[] = {
-    KC_DOT,  KC_COMM, KC_COLN, KC_GRV,  KC_QUOT, KC_QUES, KC_TILD, KC_LT,   KC_GT,   KC_EQL,  KC_LCBR, KC_RCBR, KC_PLUS,
-    KC_ASTR, KC_PERC, KC_LBRC, KC_RBRC, KC_AT,   KC_DLR,  KC_HASH, KC_CIRC, KC_PIPE, KC_AMPR, KC_SCLN, KC_DQUO, KC_MINS, KC_SLSH, KC_BSLS,
+#define X(name) KC_##name,
+    ENGLISH_SYMBOLS(X)
+#undef X
 };
-
-STATIC_ASSERT(ARRAY_SIZE(english_symbols) == EN_BSLS - EN_DOT + 1, "English symbol outputs must match their keycodes");
 
 static uint8_t  english_symbols_held;
 static uint8_t  app_nav_keys_held;
@@ -175,24 +166,16 @@ static void select_input_source(bool russian) {
     restore_mods(mods);
 }
 
+// The computer uses Russian while the keyboard is in Russian and no English symbol is held.
+static bool russian_input_expected(void) { return is_russian() && english_symbols_held == 0; }
+
 static void set_language(bool russian) {
     // Keep English underneath Russian so transparent keys retain their bindings.
     default_layer_set((1UL << EN_BASE) | (russian ? (1UL << RU_BASE) : 0));
     // The blue status LED on each half shows Russian.
     STATUS_LED_1(russian);
     STATUS_LED_4(russian);
-    layer_state_set(layer_state);
-    select_input_source(russian && english_symbols_held == 0);
-}
-
-layer_state_t layer_state_set_user(layer_state_t state) {
-    // Keep the English Symbols layer active beneath its Russian overlay.
-    if (is_russian() && (state & (1UL << SYMBOLS_EN))) {
-        state |= 1UL << SYMBOLS_RU;
-    } else {
-        state &= ~(1UL << SYMBOLS_RU);
-    }
-    return state;
+    select_input_source(russian_input_expected());
 }
 
 enum combos {
@@ -240,7 +223,7 @@ combo_t key_combos[] = {
 
 static void tap_punctuation_space(uint8_t punctuation) {
     const saved_mods_t mods = save_and_clear_mods();
-    const bool restore_russian = is_russian() && english_symbols_held == 0;
+    const bool restore_russian = russian_input_expected();
     if (restore_russian) {
         select_input_source(false);
     }
@@ -367,7 +350,7 @@ static void hello_kotify(void) {
     tap_code(KC_T);
     tap_code(KC_N);
     wait_ms(50);
-    select_input_source(is_russian() && english_symbols_held == 0);
+    select_input_source(russian_input_expected());
     restore_mods(mods);
 }
 
@@ -415,17 +398,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         keycode = EN_COMM;
     }
 
-    if (keycode >= EN_DOT && keycode <= EN_BSLS) {
+    if (is_english_symbol(keycode)) {
         const uint16_t output = pgm_read_word(&english_symbols[keycode - EN_DOT]);
         if (record->event.pressed) {
-            if (english_symbols_held++ == 0 && is_russian()) {
+            if (russian_input_expected()) {
                 select_input_source(false);
             }
+            ++english_symbols_held;
             register_symbol(output);
         } else {
             unregister_code16(output);
-            if (english_symbols_held > 0 && --english_symbols_held == 0 && is_russian()) {
-                select_input_source(true);
+            if (english_symbols_held > 0) {
+                --english_symbols_held;
+                if (russian_input_expected()) {
+                    select_input_source(true);
+                }
             }
         }
         return false;

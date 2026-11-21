@@ -22,6 +22,8 @@ fi
 git -C "$qmk_dir" submodule update --init --depth 1 \
     lib/chibios lib/chibios-contrib lib/printf modules/zsa
 
+# Start clean so files removed from the repo do not stay in the build.
+rm -rf "$keymap_dir"
 mkdir -p "$keymap_dir" "$repo_dir/dist"
 cp "$repo_dir/keymap.c" "$repo_dir/keymap.h" "$repo_dir/keymap.json" \
     "$repo_dir/config.h" "$repo_dir/rules.mk" "$repo_dir/rgb.c" \
