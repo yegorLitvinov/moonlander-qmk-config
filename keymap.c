@@ -165,11 +165,13 @@ static void restore_mods(saved_mods_t mods) {
     send_keyboard_report();
 }
 
+// Time the computer needs to switch input sources before the next symbol.
+enum { INPUT_SOURCE_SWITCH_MS = 30 };
+
 static void select_input_source(bool russian) {
     const saved_mods_t mods = save_and_clear_mods();
     tap_code16(russian ? LCTL(LSFT(KC_2)) : LCTL(LSFT(KC_1)));
-    // Give the computer time to switch input sources before sending the next symbol.
-    wait_ms(TAP_CODE_DELAY);
+    wait_ms(INPUT_SOURCE_SWITCH_MS);
     restore_mods(mods);
 }
 
@@ -348,7 +350,7 @@ static void hello_kotify(void) {
     tap_code(KC_ESC);
     tap_code16(LGUI(KC_F));
     wait_ms(50);
-    SEND_STRING_DELAY("kotify ser", TAP_CODE_DELAY);
+    SEND_STRING("kotify ser");
     wait_ms(300);
     tap_code(KC_ENT);
     wait_ms(100);
