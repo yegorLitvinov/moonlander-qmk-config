@@ -44,10 +44,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                             _______, _______, _______,             _______, _______, _______
     ),
     [SYMBOLS] = LAYOUT(
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   EN_AMPR, EN_LCBR, EN_RCBR, KC_NO,   KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   EN_HASH, EN_PIPE, EN_LBRC, EN_RBRC, KC_NO,   KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   EN_CIRC, EN_LT,   EN_GT,   KC_NO,                                    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   EN_PERC, KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   KC_NO,   EN_AMPR, EN_LCBR, EN_RCBR, EN_ASTR, KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   EN_HASH, EN_PIPE, EN_LBRC, EN_RBRC, KC_PLUS, KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   KC_NO,   EN_CIRC, EN_LT,   EN_GT,   KC_EQL,                                   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
         KC_NO,   _______, _______,KC_NO,   _______,           _______,             _______,          _______, _______,_______,KC_NO,   KC_NO,
                                             _______, _______, _______,             _______, _______, _______
     ),

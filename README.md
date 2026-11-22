@@ -126,12 +126,14 @@ keycodes. The operators send the same symbols in English and Russian.
 Hold the **right bottom-row key under K**. Symbols are on the left half:
 
 ```text
-Q  W  E  R  T       ·  &  {  }  ·
-A  S  D  F  G       #  |  [  ]  ·
-Z  X  C  V  B       ·  ^  <  >  ·
+            :                   %
+Q  W  E  R  T       ·  &  {  }  *
+A  S  D  F  G       #  |  [  ]  +
+Z  X  C  V  B       ·  ^  <  >  =
 ```
 
-Dots mark unassigned keys. In Russian, each symbol temporarily selects English.
+Dots mark unassigned keys. `%`, `*`, `+`, and `=` are in the same positions
+as on Numbers. In Russian, each symbol temporarily selects English.
 The right main-body keys do nothing on Symbols.
 
 ## System
