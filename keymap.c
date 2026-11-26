@@ -5,6 +5,7 @@
 #include "keymap_russian.h"
 #include "process_audio.h"
 #include "process_music.h"
+#include "rgb.h"
 
 // Each half has six main columns and a seventh column facing inward.
 // The red keys appear on the next-to-last line; the six narrow thumb keys are
@@ -14,7 +15,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [EN_BASE] = LAYOUT(
         KC_NO,        KC_UNDS, KC_MINS, KC_DOT,  COMMA_SPACE, KC_COLN, KC_AT,       KC_DLR,      KC_GRV,  KC_QUOT, KC_QUES, KC_LPRN, KC_RPRN, HOLD_LOCK,
         KC_TAB,       KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_NO,           KC_NO,       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_NO,
-        KC_ESC,       KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    LCTL(KC_B),      LGUI(KC_SPC), KC_H,   KC_J,    KC_K,    KC_L,    KC_NO,   KC_NO,
+        KC_ESC,       KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    LCTL(KC_B),      KC_NO,       KC_H,    KC_J,    KC_K,    KC_L,    KC_NO,   KC_NO,
         KC_TILD,      KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                                  KC_N,    KC_M,    KC_COMM, KC_NO, UNUSED_E,KC_SLSH,
         LANG_RU,      PIANO_KEY,MO(SYSTEM),KC_NO, APP_NAV_KEY,     KC_BSPC,         KC_ENT,              APP_NAV_KEY,MO(SYMBOLS),MO(NUMBERS),KC_NO,LANG_EN,
                                         OSM(MOD_LSFT), KC_LGUI, KC_LALT,          KC_NO,   KC_RCTL, KC_SPC
@@ -54,7 +55,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [SYSTEM] = LAYOUT(
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   FLASH_KEYMAPP, QK_BOOT,
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,               KC_NO,   RM_TOGG, RM_VALD, RM_VALU, RM_PREV, RM_NEXT, KC_NO,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,               KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,               KC_NO,   FX_DURATION_DOWN,FX_SPREAD_DOWN,FX_SPREAD_UP,FX_DURATION_UP,KC_NO,KC_NO,
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                                    KC_NO,   KC_BRID, KC_BRIU, KC_NO,   KC_NO,   KC_NO,
         KC_NO,   _______, _______,KC_NO,   _______,           _______,             _______,          _______, _______,_______,KC_NO,   KC_NO,
                                             _______, _______, _______,             _______, _______, _______
@@ -79,6 +80,7 @@ static const uint16_t PROGMEM english_symbols[] = {
 static uint8_t  english_symbols_held;
 static uint8_t  app_nav_keys_held;
 static bool     comma_held_with_mods;
+static uint32_t plain_comma_sent_at;
 static bool     lock_held;
 static bool     lock_sent;
 static uint16_t lock_timer;
@@ -157,7 +159,7 @@ static void restore_mods(saved_mods_t mods) {
 }
 
 // Time the computer needs to switch input sources before the next symbol.
-enum { INPUT_SOURCE_SWITCH_MS = 30 };
+enum { INPUT_SOURCE_SWITCH_MS = 40, PUNCTUATION_RESTORE_DELAY_MS = 30 };
 
 static void select_input_source(bool russian) {
     const saved_mods_t mods = save_and_clear_mods();
@@ -230,6 +232,7 @@ static void tap_punctuation_space(uint8_t punctuation) {
     tap_code(punctuation);
     tap_code(KC_SPC);
     if (restore_russian) {
+        wait_ms(PUNCTUATION_RESTORE_DELAY_MS);
         select_input_source(true);
     }
     restore_mods(mods);
@@ -312,6 +315,9 @@ static void process_piano_key(bool pressed) {
 }
 
 bool pre_process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (record->event.pressed && IS_KEYEVENT(record->event)) {
+        rgb_effect_keypress(record->event.key.row, record->event.key.col);
+    }
     if (keycode == PIANO_KEY) {
         process_piano_key(record->event.pressed);
         return false;
@@ -358,15 +364,15 @@ static void hello_kotify(void) {
 static void flash_keymapp(void) {
     save_and_clear_mods();
     tap_code16(APP(KC_Q));
-    wait_ms(1000);
+    wait_ms(3000);
     // Open the flash dialog.
-    tap_code(KC_TAB);
+    for (uint8_t i = 0; i < 6; ++i) {
+        tap_code(KC_TAB);
+    }
     tap_code(KC_SPC);
     wait_ms(500);
     // Open the firmware file dialog.
-    for (uint8_t i = 0; i < 5; ++i) {
-        tap_code(KC_TAB);
-    }
+    tap_code(KC_TAB);
     tap_code(KC_SPC);
     wait_ms(1000);
     // The firmware is the second file in the dialog.
@@ -374,6 +380,8 @@ static void flash_keymapp(void) {
     tap_code(KC_DOWN);
     tap_code(KC_ENT);
     wait_ms(500);
+    tap_code(KC_TAB);
+    tap_code(KC_SPC);
     reset_keyboard();
 }
 
@@ -406,8 +414,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             ++english_symbols_held;
             register_symbol(output);
+            if (keycode == EN_COMM) {
+                plain_comma_sent_at = timer_read32();
+            }
         } else {
             unregister_code16(output);
+            if (keycode == EN_COMM && is_russian()) {
+                // Time spent holding the comma already counts toward the delay.
+                const uint32_t elapsed = timer_elapsed32(plain_comma_sent_at);
+                if (elapsed < PUNCTUATION_RESTORE_DELAY_MS) {
+                    wait_ms(PUNCTUATION_RESTORE_DELAY_MS - elapsed);
+                }
+            }
             if (english_symbols_held > 0) {
                 --english_symbols_held;
                 if (russian_input_expected()) {
@@ -428,6 +446,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
 
     switch (keycode) {
+    case FX_DURATION_DOWN:
+    case FX_DURATION_UP:
+    case FX_SPREAD_DOWN:
+    case FX_SPREAD_UP:
+        if (record->event.pressed) {
+            adjust_rgb_effect(keycode);
+        }
+        return false;
     case PIANO_NOTE: {
         const uint8_t note = PIANO_LOWEST_NOTE + music_map[record->event.key.row][record->event.key.col];
         if (record->event.pressed) {
@@ -482,6 +508,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 void matrix_scan_user(void) {
+    rgb_effects_scan();
     if (piano_key_held && !layer_state_is(PIANO) && timer_elapsed32(piano_key_timer) >= PIANO_HOLD_MS) {
         piano_taps = 0;
         layer_on(PIANO);

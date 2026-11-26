@@ -38,6 +38,10 @@ enum custom_keycodes {
     PIANO_NOTE,
     COMMA_SPACE,
     APP_NAV_KEY,
+    FX_DURATION_DOWN,
+    FX_DURATION_UP,
+    FX_SPREAD_DOWN,
+    FX_SPREAD_UP,
 };
 
 #define APP(key) LGUI(LCTL(LALT(key)))

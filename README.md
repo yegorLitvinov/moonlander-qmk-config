@@ -63,7 +63,6 @@ with an unassigned key, underscore, and minus.
 | Top-row comma | Comma followed by a space. With a modifier, acts as a regular comma key. |
 | Right of M | Plain comma in English, Б in Russian |
 | Inner key right of G | Ctrl + B |
-| Left of H | Cmd + Space |
 | Top-right key | Hold for one second to send Cmd + Ctrl + Q (lock macOS) |
 
 The other spare bottom-row keys are unassigned. Minus and slash keep their base
@@ -84,6 +83,10 @@ after the last symbol is released.
 Held modifiers are preserved around input-source shortcuts. The `hello_kotify`
 macro searches for `kotify ser`, then sends the original greeting. It restores
 the current keyboard language when finished.
+
+Keep punctuation fixes compatible with other input layouts on the computer.
+Avoid relying on shortcuts specific to one layout, such as Shift + 6 for a
+comma on the standard macOS Russian layout.
 
 ## App-Nav
 
@@ -147,6 +150,8 @@ half.
 | Y | RGB on/off |
 | U / I | RGB brightness down/up |
 | O / P | Previous/next RGB effect |
+| H / L | Shorter/longer duration for the selected Heatmap or Quick Fade effect |
+| J / K | Narrower/wider Quick Fade spread |
 | Key left of the top-right key | Flash with Keymapp: open it (Cmd + Ctrl + Alt + Q), select `moonlander-reva.bin`, then enter bootloader mode |
 | Top-right key | Enter bootloader mode for flashing |
 
@@ -170,13 +175,12 @@ Hold System and use **O / P** to cycle backward / forward through four modes:
 
 | Mode | Behavior |
 | --- | --- |
-| Key roles (default) | Colors come from each key's current action. Transparent keys use their inherited action; unused keys stay dark. |
-| Heatmap | Repeated presses build brightness and move the key's color from blue through green to red. The effect fades over time. |
-| Quick fade | Each press lights the key for about 300 ms. Repeated presses restart the fade without building brightness. |
-| Finger zones | Fixed colors by finger, mirrored across the two halves. |
+| Key roles (default) | On English and Russian, key colors show their actions and layer buttons show their target colors. On other layers, keys with an explicit action show the layer color. |
+| Heatmap | Repeated presses build brightness and move the key's color from blue through green to red. A single press fades in about 1.6 seconds by default. |
+| Quick fade | Each press lights the key and nearby keys for up to 650 ms by default. The farther a key is from the press, the dimmer it gets. Repeated presses restart the fade without building brightness. |
+| Finger zones | Fixed colors by finger. The outer top corners use ring finger colors and both App-Nav keys use the thumb color. |
 
-Quick fade uses the active layer's color. Finger zones and key roles
-use fixed RGB palettes, scaled by the current brightness.
+Quick fade uses the active layer's color. Finger zones use a fixed RGB palette.
 
 With RGB on, both thumb clusters show the active layer:
 
@@ -197,15 +201,18 @@ can only be on or off. Both blue LEDs are on while Russian is selected. The othe
 only show the startup animation.
 
 **System + Y** toggles all RGB, including the thumb indicators.
-**System + U / I** adjusts brightness. Mode, RGB state, and brightness are saved
-across reconnects.
+**System + U / I** adjusts brightness. **System + H / L** adjusts the Heatmap
+and Quick Fade durations independently, depending on which effect is selected.
+**System + J / K** changes Quick Fade spread while it is selected. At the
+narrowest setting, only the pressed key lights up. RGB settings survive
+reconnects.
 
-The palettes are constants in [rgb.c](rgb.c). Key-role colors are assigned from
-the current keymap and need no per-key color table. Letters are white, numbers
-green, symbols yellow, modifiers blue, editing keys orange, navigation cyan,
-layer keys orange-red, shortcuts magenta, media purple, and system controls red.
+The palettes are constants in [rgb.c](rgb.c). In Key Roles on English and
+Russian, transparent keys use their inherited action and unused keys stay
+dark. Letters are white, numbers green, symbols yellow, modifiers blue,
+editing keys orange, shortcuts magenta, and system controls red.
 Finger zones use pink for pinkies, yellow for ring fingers, green for middle
-fingers, and cyan for index fingers.
+fingers, cyan for index fingers, and purple for thumbs.
 
 ## Combos
 
